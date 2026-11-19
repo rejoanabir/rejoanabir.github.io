@@ -102,6 +102,47 @@ body::before {
   transform: translateY(-4px);
 }
 
+/* 3D Elevated Stat Card */
+.stat-card-3d {
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.85) 0%, rgba(10, 15, 28, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stat-card-3d:hover {
+  border-color: rgba(0, 240, 255, 0.4);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 40px -10px rgba(0, 240, 255, 0.25), inset 0 1px 0 rgba(0, 240, 255, 0.3);
+}
+
+/* Floating 3D Badge animations */
+@keyframes float3D {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(2deg);
+  }
+}
+
+@keyframes float3DReverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(10px) rotate(-2deg);
+  }
+}
+
+.animate-float-3d {
+  animation: float3D 6s ease-in-out infinite;
+}
+
+.animate-float-3d-reverse {
+  animation: float3DReverse 5.5s ease-in-out infinite;
+}
+
 /* Neon Glows */
 .glow-cyan-text {
   text-shadow: 0 0 12px rgba(0, 240, 255, 0.6), 0 0 35px rgba(0, 240, 255, 0.3);
@@ -113,118 +154,6 @@ body::before {
 
 .glow-box-cyan-intense {
   box-shadow: 0 0 45px -5px rgba(0, 240, 255, 0.6), 0 0 20px rgba(37, 99, 235, 0.4);
-}
-
-.glow-box-lime {
-  box-shadow: 0 0 20px -3px rgba(204, 255, 0, 0.4);
-}
-
-.glow-box-pink {
-  box-shadow: 0 0 20px -3px rgba(236, 72, 153, 0.4);
-}
-
-/* Sticker & Tape styles matching the reference */
-.sticker-yellow {
-  background: #ccff00;
-  color: #050810;
-  font-weight: 800;
-  box-shadow: 4px 6px 0px #050810, 0 10px 20px rgba(204, 255, 0, 0.25);
-  transform: rotate(-3deg);
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.sticker-yellow:hover {
-  transform: rotate(0deg) scale(1.05);
-}
-
-.sticker-cyan {
-  background: #00f0ff;
-  color: #050810;
-  font-weight: 800;
-  box-shadow: 3px 5px 0px #050810, 0 10px 20px rgba(0, 240, 255, 0.3);
-  transform: rotate(2.5deg);
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.sticker-cyan:hover {
-  transform: rotate(0deg) scale(1.05);
-}
-
-.sticker-note-white {
-  background: #f8fafc;
-  color: #0a0e1a;
-  box-shadow: 4px 6px 0px rgba(0,0,0,0.8), 0 15px 30px rgba(0,0,0,0.5);
-  transform: rotate(3deg);
-}
-
-/* Street art graffiti doodle SVG styles */
-.doodle-stroke {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* Floating animation for mascot and badges */
-@keyframes floatGentle {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-14px) rotate(1deg);
-  }
-}
-
-@keyframes pulseGlow {
-  0%, 100% {
-    opacity: 0.85;
-    filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.4));
-  }
-  50% {
-    opacity: 1;
-    filter: drop-shadow(0 0 30px rgba(0, 240, 255, 0.85));
-  }
-}
-
-@keyframes spinSlow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.animate-float {
-  animation: floatGentle 5s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 3s ease-in-out infinite;
-}
-
-.animate-spin-slow {
-  animation: spinSlow 20s linear infinite;
-}
-
-/* Speech bubble arrow */
-.speech-bubble {
-  position: relative;
-  background: #ffffff;
-  color: #070a12;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 240, 255, 0.2);
-}
-
-.speech-bubble::after {
-  content: '';
-  position: absolute;
-  bottom: -14px;
-  left: 32px;
-  border-width: 14px 14px 0;
-  border-style: solid;
-  border-color: #ffffff transparent;
-  display: block;
-  width: 0;
 }
 
 /* Video player & Showreel frame */
@@ -254,6 +183,21 @@ body::before {
     height: 28px;
     opacity: 1;
   }
+}
+
+/* Form input styling */
+.tech-input {
+  background: rgba(10, 15, 26, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+  transition: all 0.25s ease;
+}
+
+.tech-input:focus {
+  outline: none;
+  border-color: #00f0ff;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+  background: rgba(13, 20, 36, 0.95);
 }
 
 /* Toast alert notification */

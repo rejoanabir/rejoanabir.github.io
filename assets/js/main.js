@@ -1,12 +1,22 @@
 /**
- * Veltus Studio - Interactive Motion Graphics & Portfolio Script
- * Engineered with GSAP, Web Audio API, and Canvas Particles
+ * Veltus Studio — Upgraded Interactive Motion Graphics Engine
+ * Features:
+ * - GSAP ScrollTrigger reveals
+ * - 3D Mouse Parallax & Dynamic Card Tilt
+ * - Animated Number Counters (Count-up on scroll)
+ * - Interactive Testimonial Carousel
+ * - Functional Contact Form with Audio Feedback & Toast
+ * - Interactive Canvas Starfield Particle Physics
+ * - Futuristic Web Audio API SFX synthesizer
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   initParticles();
   initAudio();
   initTilt();
+  initCounters();
+  initTestimonials();
+  initContactForm();
   initAnimations();
   initProjectFilters();
   initShowreelModal();
@@ -81,7 +91,7 @@ function initParticles() {
 }
 
 /* ----------------------------------------------------
-   2. Futuristic Web Audio Micro-Interactions (Synth SFX)
+   2. Web Audio Micro-Interactions (Synth SFX)
    ---------------------------------------------------- */
 let audioCtx = null;
 let soundEnabled = true;
@@ -100,7 +110,7 @@ function initAudio() {
     }
   }
 
-  function playSynthBlip(freq = 520, type = 'sine', duration = 0.08, gainVal = 0.04) {
+  window.playSynthBlip = function(freq = 520, type = 'sine', duration = 0.08, gainVal = 0.04) {
     if (!soundEnabled) return;
     try {
       ensureAudioCtx();
@@ -117,7 +127,7 @@ function initAudio() {
       osc.start();
       osc.stop(audioCtx.currentTime + duration);
     } catch (e) {}
-  }
+  };
 
   if (soundToggle) {
     soundToggle.addEventListener('click', () => {
@@ -126,48 +136,60 @@ function initAudio() {
       if (soundIcon) {
         soundIcon.textContent = soundEnabled ? '🔊 SFX ON' : '🔇 SFX OFF';
       }
-      if (soundEnabled) playSynthBlip(680, 'triangle', 0.1, 0.08);
+      if (soundEnabled) window.playSynthBlip(680, 'triangle', 0.1, 0.08);
     });
   }
 
-  // Attach micro-sounds to interactive buttons & links
+  // Attach micro-sounds to interactive elements
   document.querySelectorAll('button, a, .interactive-click').forEach((el) => {
-    el.addEventListener('mouseenter', () => playSynthBlip(480, 'sine', 0.04, 0.02));
-    el.addEventListener('click', () => playSynthBlip(880, 'triangle', 0.08, 0.05));
+    el.addEventListener('mouseenter', () => window.playSynthBlip(480, 'sine', 0.04, 0.02));
+    el.addEventListener('click', () => window.playSynthBlip(880, 'triangle', 0.08, 0.05));
   });
 }
 
 /* ----------------------------------------------------
-   3. 3D Parallax & Card Tilt Physics
+   3. 3D Parallax & Dynamic Card Tilt Physics
    ---------------------------------------------------- */
 function initTilt() {
-  const mascotCard = document.getElementById('hero-mascot-card');
+  const heroScene = document.getElementById('hero-desk-scene');
   const heroSection = document.getElementById('hero-section');
 
-  if (mascotCard && heroSection) {
+  if (heroScene && heroSection) {
     heroSection.addEventListener('mousemove', (e) => {
       const rect = heroSection.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
-      const rotateX = (-y / rect.height) * 14;
-      const rotateY = (x / rect.width) * 14;
+      const rotateX = (-y / rect.height) * 12;
+      const rotateY = (x / rect.width) * 12;
 
-      mascotCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+      heroScene.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+
+      // Parallax floating badges around hero
+      document.querySelectorAll('.hero-float-badge').forEach((badge, index) => {
+        const factor = (index + 1) * 8;
+        const bx = (x / rect.width) * factor;
+        const by = (y / rect.height) * factor;
+        badge.style.transform = `translate(${bx}px, ${by}px)`;
+      });
     });
 
     heroSection.addEventListener('mouseleave', () => {
-      mascotCard.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-      mascotCard.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+      heroScene.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      heroScene.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+      document.querySelectorAll('.hero-float-badge').forEach((badge) => {
+        badge.style.transform = 'translate(0px, 0px)';
+        badge.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+      });
     });
 
     heroSection.addEventListener('mouseenter', () => {
-      mascotCard.style.transition = 'transform 0.1s ease-out';
+      heroScene.style.transition = 'transform 0.1s ease-out';
+      document.querySelectorAll('.hero-float-badge').forEach((b) => b.style.transition = 'transform 0.1s ease-out');
     });
   }
 
-  // 3D tilt on project cards
-  const projectCards = document.querySelectorAll('.project-card');
-  projectCards.forEach((card) => {
+  // 3D tilt on all interactive cards
+  document.querySelectorAll('.tilt-card').forEach((card) => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
@@ -189,40 +211,164 @@ function initTilt() {
 }
 
 /* ----------------------------------------------------
-   4. GSAP & Kinetic Scroll Animations (Progressive Enhancement)
+   4. Animated Stat Number Counters (Count-up on Scroll)
+   ---------------------------------------------------- */
+function initCounters() {
+  const counterEls = document.querySelectorAll('.counter-val');
+  if (!counterEls.length) return;
+
+  let counted = false;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && !counted) {
+        counted = true;
+        counterEls.forEach((counter) => {
+          const target = parseInt(counter.getAttribute('data-target'), 10);
+          const suffix = counter.getAttribute('data-suffix') || '';
+          const duration = 1600;
+          const startTime = performance.now();
+
+          function updateCounter(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease-out cubic
+            const easeProgress = 1 - Math.pow(1 - progress, 3);
+            const currentVal = Math.floor(easeProgress * target);
+
+            counter.textContent = `${currentVal}${suffix}`;
+
+            if (progress < 1) {
+              requestAnimationFrame(updateCounter);
+            } else {
+              counter.textContent = `${target}${suffix}`;
+            }
+          }
+          requestAnimationFrame(updateCounter);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const statsSection = document.getElementById('stats-container');
+  if (statsSection) observer.observe(statsSection);
+}
+
+/* ----------------------------------------------------
+   5. Interactive Testimonial Quote Carousel
+   ---------------------------------------------------- */
+function initTestimonials() {
+  const items = document.querySelectorAll('.testimonial-slide');
+  const prevBtn = document.getElementById('prev-testimonial');
+  const nextBtn = document.getElementById('next-testimonial');
+  const dots = document.querySelectorAll('.testimonial-dot');
+
+  if (!items.length) return;
+
+  let currentIndex = 0;
+
+  function showSlide(index) {
+    items.forEach((item, i) => {
+      if (i === index) {
+        item.classList.remove('hidden');
+        item.classList.add('flex');
+        if (typeof gsap !== 'undefined') {
+          gsap.fromTo(item, { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.45, ease: 'power2.out' });
+        }
+      } else {
+        item.classList.add('hidden');
+        item.classList.remove('flex');
+      }
+    });
+
+    dots.forEach((dot, i) => {
+      if (i === index) {
+        dot.classList.add('bg-cyan-neon', 'w-8');
+        dot.classList.remove('bg-slate-700', 'w-2.5');
+      } else {
+        dot.classList.remove('bg-cyan-neon', 'w-8');
+        dot.classList.add('bg-slate-700', 'w-2.5');
+      }
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % items.length;
+      showSlide(currentIndex);
+      if (window.playSynthBlip) window.playSynthBlip(600, 'sine', 0.05, 0.03);
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + items.length) % items.length;
+      showSlide(currentIndex);
+      if (window.playSynthBlip) window.playSynthBlip(500, 'sine', 0.05, 0.03);
+    });
+  }
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      currentIndex = index;
+      showSlide(currentIndex);
+    });
+  });
+
+  // Auto advance every 8 seconds
+  setInterval(() => {
+    if (document.hidden) return;
+    currentIndex = (currentIndex + 1) % items.length;
+    showSlide(currentIndex);
+  }, 8000);
+}
+
+/* ----------------------------------------------------
+   6. Interactive Contact Form with Validation & Audio
+   ---------------------------------------------------- */
+function initContactForm() {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nameInput = document.getElementById('form-name');
+    const emailInput = document.getElementById('form-email');
+    const messageInput = document.getElementById('form-message');
+
+    if (!nameInput?.value.trim() || !emailInput?.value.trim() || !messageInput?.value.trim()) {
+      showToast('⚠️ Please fill out all required fields');
+      return;
+    }
+
+    if (window.playSynthBlip) {
+      window.playSynthBlip(600, 'triangle', 0.1, 0.06);
+      setTimeout(() => window.playSynthBlip(900, 'sine', 0.15, 0.08), 120);
+    }
+
+    showToast(`🚀 Thank you, ${nameInput.value.trim()}! Message sent successfully.`);
+    form.reset();
+  });
+}
+
+/* ----------------------------------------------------
+   7. GSAP Kinetic Scroll Animations
    ---------------------------------------------------- */
 function initAnimations() {
   if (typeof gsap === 'undefined') return;
 
-  // Ensure ticking works even in background or throttled tabs
   gsap.ticker.lagSmoothing(1000, 16);
 
-  // Animate from initial state to full visibility
-  gsap.fromTo('#hero-eyebrow', { opacity: 0, y: -15 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', clearProps: 'opacity,transform' });
+  // Stagger in Hero
+  gsap.fromTo('#hero-badge', { opacity: 0, y: -15 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', clearProps: 'opacity,transform' });
   gsap.fromTo('#hero-title', { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.1, ease: 'power3.out', clearProps: 'opacity,transform' });
-  gsap.fromTo('#hero-subtitles', { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.6, delay: 0.2, ease: 'power2.out', clearProps: 'opacity,transform' });
-  gsap.fromTo('.hero-badge', { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.5, delay: 0.3, stagger: 0.1, ease: 'back.out(1.5)', clearProps: 'opacity,transform' });
-  gsap.fromTo('.hero-cta-btn', { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.4, stagger: 0.1, ease: 'power2.out', clearProps: 'opacity,transform' });
-  gsap.fromTo('#hero-mascot-card', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.9, delay: 0.2, ease: 'back.out(1.4)', clearProps: 'opacity,transform' });
+  gsap.fromTo('#hero-tagline', { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.2, ease: 'power2.out', clearProps: 'opacity,transform' });
+  gsap.fromTo('.hero-cta-btn', { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.3, stagger: 0.1, ease: 'power2.out', clearProps: 'opacity,transform' });
+  gsap.fromTo('#hero-desk-scene', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.9, delay: 0.2, ease: 'back.out(1.4)', clearProps: 'opacity,transform' });
 
   // ScrollTrigger reveals
   if (typeof ScrollTrigger !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
-
-    gsap.fromTo('#showreel-container', 
-      { opacity: 0, y: 30 }, 
-      {
-        scrollTrigger: {
-          trigger: '#showreel-section',
-          start: 'top 85%',
-        },
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-        clearProps: 'opacity,transform'
-      }
-    );
 
     gsap.fromTo('.project-card', 
       { opacity: 0, y: 30 }, 
@@ -233,25 +379,9 @@ function initAnimations() {
         },
         opacity: 1,
         y: 0,
-        stagger: 0.12,
-        duration: 0.7,
+        stagger: 0.1,
+        duration: 0.65,
         ease: 'power3.out',
-        clearProps: 'opacity,transform'
-      }
-    );
-
-    gsap.fromTo('.skill-card', 
-      { opacity: 0, scale: 0.9 }, 
-      {
-        scrollTrigger: {
-          trigger: '#skills-section',
-          start: 'top 80%',
-        },
-        opacity: 1,
-        scale: 1,
-        stagger: 0.06,
-        duration: 0.5,
-        ease: 'back.out(1.5)',
         clearProps: 'opacity,transform'
       }
     );
@@ -259,7 +389,7 @@ function initAnimations() {
 }
 
 /* ----------------------------------------------------
-   5. Project Category Filter Tabs
+   8. Project Category Filter Tabs
    ---------------------------------------------------- */
 function initProjectFilters() {
   const filterBtns = document.querySelectorAll('.filter-btn');
@@ -268,10 +398,10 @@ function initProjectFilters() {
   filterBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
       filterBtns.forEach((b) => {
-        b.classList.remove('bg-cyan-400', 'text-black', 'border-cyan-400', 'shadow-cyan');
+        b.classList.remove('bg-cyan-400', 'text-black', 'border-cyan-400');
         b.classList.add('bg-slate-900/60', 'text-slate-300', 'border-white/10');
       });
-      btn.classList.add('bg-cyan-400', 'text-black', 'border-cyan-400', 'shadow-cyan');
+      btn.classList.add('bg-cyan-400', 'text-black', 'border-cyan-400');
       btn.classList.remove('bg-slate-900/60', 'text-slate-300', 'border-white/10');
 
       const filter = btn.getAttribute('data-filter');
@@ -292,7 +422,7 @@ function initProjectFilters() {
 }
 
 /* ----------------------------------------------------
-   6. Interactive Showreel Modal & Video Simulator
+   9. Showreel Modal & Video Simulator
    ---------------------------------------------------- */
 function initShowreelModal() {
   const openBtns = document.querySelectorAll('.open-showreel-modal');
@@ -322,7 +452,6 @@ function initShowreelModal() {
     if (e.target === modal) closeModal();
   });
 
-  // Simulated live cyber UI waveform loop inside modal
   let simAnimId = null;
   function startShowreelCanvas() {
     if (!modalCanvas) return;
@@ -350,7 +479,6 @@ function initShowreelModal() {
       }
       ctx.stroke();
 
-      // Second harmonic wave
       ctx.strokeStyle = '#2563eb';
       ctx.beginPath();
       for (let x = 0; x < modalCanvas.width; x += 4) {
@@ -368,13 +496,10 @@ function initShowreelModal() {
 }
 
 /* ----------------------------------------------------
-   7. Clipboard Copy with Neon Toast Notification
+   10. Clipboard Copy & Toast Alert
    ---------------------------------------------------- */
 function initClipboard() {
   const copyBtn = document.getElementById('copy-email-btn');
-  const toast = document.getElementById('toast');
-  const toastMsg = document.getElementById('toast-msg');
-
   if (copyBtn) {
     copyBtn.addEventListener('click', () => {
       const email = 'Veltusstudio@gmail.com';
@@ -385,19 +510,21 @@ function initClipboard() {
       });
     });
   }
+}
 
-  function showToast(text) {
-    if (!toast) return;
-    if (toastMsg) toastMsg.textContent = text;
-    toast.classList.add('show');
-    setTimeout(() => {
-      toast.classList.remove('show');
-    }, 3200);
-  }
+function showToast(text) {
+  const toast = document.getElementById('toast');
+  const toastMsg = document.getElementById('toast-msg');
+  if (!toast) return;
+  if (toastMsg) toastMsg.textContent = text;
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3200);
 }
 
 /* ----------------------------------------------------
-   8. Mobile Navigation Toggle
+   11. Mobile Navigation Toggle
    ---------------------------------------------------- */
 function initMobileMenu() {
   const menuBtn = document.getElementById('mobile-menu-btn');
