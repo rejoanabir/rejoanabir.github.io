@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Veltus Studio — Android Dev • Mobile UI/UX • AI-Powered Apps</title>
-  <meta name="description" content="Veltus Studio builds sleek, boundary-pushing Android applications where utility meets visual craft. From AI-powered assistants to next-gen mobile experiences.">
+  <title>Rejoan Abir — Android Engineer • Mobile UI/UX Architect • AI Systems</title>
+  <meta name="description" content="Official personal portfolio of Rejoan Abir. Engineering high-velocity Android applications, intelligent edge AI systems, and responsive digital interfaces.">
   <link rel="icon" type="image/jpeg" href="assets/images/veltus_logo.jpg">
 
   <!-- Tailwind CSS CDN -->
@@ -15,8 +15,8 @@
       theme: {
         extend: {
           colors: {
-            obsidian: '#070a12',
-            midnight: '#0b1120',
+            obsidian: '#06080e',
+            midnight: '#0a0e1a',
             cyan: {
               300: '#67e8f9',
               400: '#22d3ee',
@@ -27,6 +27,11 @@
               500: '#3b82f6',
               600: '#2563eb',
               700: '#1d4ed8',
+            },
+            purple: {
+              400: '#c084fc',
+              500: '#a855f7',
+              600: '#9333ea',
             },
             lime: {
               neon: '#ccff00',
@@ -59,7 +64,7 @@
   <!-- Background Particle Canvas -->
   <canvas id="bg-particles" class="fixed inset-0 pointer-events-none z-0"></canvas>
 
-  <!-- Interactive SFX Toggle & Status Bar -->
+  <!-- Interactive SFX Toggle -->
   <div class="fixed top-4 right-4 z-50 flex items-center gap-2">
     <button id="sound-toggle" class="glass-panel px-3.5 py-1.5 rounded-full text-xs font-mono font-semibold text-cyan-400 border border-cyan-500/30 hover:border-cyan-400 transition-all flex items-center gap-1.5 shadow-lg shadow-cyan-900/20 active:scale-95">
       <span id="sound-icon">🔊 SFX ON</span>
@@ -70,26 +75,27 @@
   <header class="fixed top-0 left-0 right-0 z-40 bg-obsidian/90 backdrop-blur-md border-b border-white/5 transition-all">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
-      <!-- Brand Logo -->
+      <!-- Brand Logo: Rejoan Abir -->
       <a href="#hero-section" class="flex items-center gap-3 group">
-        <div class="relative w-11 h-11 rounded-xl overflow-hidden p-0.5 bg-gradient-to-br from-cyan-400 via-royal-600 to-slate-800 shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform duration-300">
-          <img src="assets/images/veltus_logo.jpg" alt="Veltus Studio Logo" class="w-full h-full object-cover rounded-[10px]">
+        <div class="relative w-11 h-11 rounded-xl overflow-hidden p-0.5 bg-gradient-to-br from-cyan-400 via-royal-600 to-purple-600 shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform duration-300">
+          <img src="assets/images/veltus_logo.jpg" alt="Rejoan Abir Logo Mark" class="w-full h-full object-cover rounded-[10px]">
         </div>
         <div class="flex flex-col">
           <span class="font-display font-extrabold text-xl tracking-wider text-white flex items-center gap-1.5">
-            VELTUS <span class="text-cyan-neon font-light text-base">STUDIO</span>
+            REJOAN <span class="text-cyan-neon font-light text-base">ABIR</span>
           </span>
-          <span class="text-[10px] font-mono tracking-widest text-slate-400 uppercase -mt-0.5">Android Craft</span>
+          <span class="text-[10px] font-mono tracking-widest text-slate-400 uppercase -mt-0.5">Android & AI Systems</span>
         </div>
       </a>
 
       <!-- Desktop Nav Links -->
-      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-300">
+      <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-300">
         <a href="#hero-section" class="hover:text-cyan-neon transition-colors">Home</a>
         <a href="#about-section" class="hover:text-cyan-neon transition-colors">About</a>
         <a href="#skills-section" class="hover:text-cyan-neon transition-colors">Skills</a>
         <a href="#projects-section" class="hover:text-cyan-neon transition-colors">Projects</a>
         <a href="#showreel-section" class="hover:text-cyan-neon transition-colors">Showreel</a>
+        <a href="#github-section" class="hover:text-cyan-neon transition-colors">GitHub Live</a>
         <a href="#milestones-section" class="hover:text-cyan-neon transition-colors">Milestones</a>
         <a href="#contact-section" class="hover:text-cyan-neon transition-colors">Contact</a>
       </nav>
@@ -98,9 +104,9 @@
       <div class="hidden sm:flex items-center gap-4">
         <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/80 border border-white/10 text-xs font-mono">
           <span class="w-2 h-2 rounded-full bg-cyan-neon animate-ping"></span>
-          <span class="text-cyan-300">OPEN FOR DEV</span>
+          <span class="text-cyan-300">OPEN FOR WORK</span>
         </div>
-        <a href="https://github.com/veltus-studio" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl bg-slate-900/90 border border-white/10 text-slate-300 hover:text-white hover:border-cyan-400 transition-all hover:scale-105 active:scale-95 shadow-md">
+        <a href="https://github.com/rejoanabir" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl bg-slate-900/90 border border-white/10 text-slate-300 hover:text-white hover:border-cyan-400 transition-all hover:scale-105 active:scale-95 shadow-md" title="Personal GitHub">
           <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
           </svg>
@@ -108,7 +114,7 @@
       </div>
 
       <!-- Mobile Hamburger Button -->
-      <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg bg-slate-900 border border-white/10 text-cyan-400 hover:text-white focus:outline-none">
+      <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg bg-slate-900 border border-white/10 text-cyan-400 hover:text-white focus:outline-none">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
@@ -117,24 +123,25 @@
     </div>
 
     <!-- Mobile Dropdown Navigation -->
-    <div id="mobile-nav" class="hidden md:hidden bg-obsidian/95 border-b border-white/10 px-6 py-6 space-y-4">
+    <div id="mobile-nav" class="hidden lg:hidden bg-obsidian/95 border-b border-white/10 px-6 py-6 space-y-4">
       <a href="#hero-section" class="block text-base font-medium text-slate-200 hover:text-cyan-neon">Home</a>
       <a href="#about-section" class="block text-base font-medium text-slate-200 hover:text-cyan-neon">About</a>
       <a href="#skills-section" class="block text-base font-medium text-slate-200 hover:text-cyan-neon">Skills</a>
       <a href="#projects-section" class="block text-base font-medium text-slate-200 hover:text-cyan-neon">Projects</a>
       <a href="#showreel-section" class="block text-base font-medium text-slate-200 hover:text-cyan-neon">Showreel</a>
+      <a href="#github-section" class="block text-base font-medium text-slate-200 hover:text-cyan-neon">GitHub Live</a>
       <a href="#milestones-section" class="block text-base font-medium text-slate-200 hover:text-cyan-neon">Milestones</a>
       <a href="#contact-section" class="block text-base font-medium text-slate-200 hover:text-cyan-neon">Contact</a>
       <div class="pt-4 border-t border-white/10 flex items-center justify-between">
         <span class="text-xs font-mono text-cyan-300">Dhaka, Bangladesh</span>
-        <a href="https://github.com/veltus-studio" target="_blank" class="text-xs font-mono text-cyan-neon underline">GitHub Studio →</a>
+        <a href="https://github.com/rejoanabir" target="_blank" class="text-xs font-mono text-cyan-neon underline">@rejoanabir →</a>
       </div>
     </div>
   </header>
 
 
   <!-- ========================================================
-       1. UPGRADED HERO SECTION (3D Desk Scene with Parallax)
+       1. HERO SECTION (Rejoan Abir 3D Desk Scene)
        ======================================================== -->
   <section id="hero-section" class="relative pt-28 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
     
@@ -146,26 +153,26 @@
         <!-- Status Pill Tag -->
         <div id="hero-badge" class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/60 border border-cyan-400/30 text-xs font-mono text-cyan-300 mb-4 backdrop-blur-sm shadow-md">
           <span class="w-2 h-2 rounded-full bg-cyan-neon animate-ping"></span>
-          <span>ANDROID & AI SYSTEMS LAB • MOBILE CRAFT ⚡</span>
+          <span>ANDROID & AI SYSTEMS ENGINEER • MOBILE CRAFT ⚡</span>
         </div>
 
         <!-- Main Heading -->
         <h1 id="hero-title" class="font-display font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight leading-tight mb-4">
-          <span class="text-slate-400 font-bold block text-2xl sm:text-3xl lg:text-4xl">Hi, We're</span>
+          <span class="text-slate-400 font-bold block text-2xl sm:text-3xl lg:text-4xl">Hi, I'm</span>
           <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-200 to-cyan-neon glow-cyan-text">
-            VELTUS STUDIO
+            REJOAN ABIR
           </span>
         </h1>
 
         <!-- Bio Description Tagline -->
         <p id="hero-tagline" class="text-base sm:text-lg text-slate-300 font-normal leading-relaxed mb-6 max-w-xl">
-          We engineer sleek, boundary-pushing Android applications where utility meets visual craft. From AI-powered assistants to responsive mobile systems, built with clean architecture and fluid motion.
+          Engineering high-velocity Android applications, intelligent edge AI systems, and responsive digital interfaces with uncompromising craft. Founder & lead engineer at Veltus Studio.
         </p>
 
         <!-- Call to Action Buttons -->
         <div class="flex flex-wrap items-center gap-4 w-full sm:w-auto mb-8">
           <a href="#projects-section" class="hero-cta-btn group relative px-8 py-4 rounded-full bg-gradient-to-r from-cyan-500 to-royal-600 text-black font-display font-black text-sm tracking-wider uppercase transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(0,240,255,0.5)] hover:shadow-[0_0_45px_rgba(0,240,255,0.8)] flex items-center gap-3">
-            <span>Explore Our Work</span>
+            <span>Explore Projects</span>
             <span class="w-6 h-6 rounded-full bg-black/20 flex items-center justify-center text-black group-hover:translate-x-1 transition-transform">→</span>
           </a>
 
@@ -173,18 +180,21 @@
             <svg class="w-4 h-4 text-cyan-neon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
             </svg>
-            <span>Contact Studio</span>
+            <span>Contact Me</span>
           </a>
         </div>
 
         <!-- Social Connect Dock -->
         <div class="flex items-center gap-4 text-xs font-mono text-slate-400">
-          <span>Connect with us:</span>
+          <span>Follow & Connect:</span>
           <div class="flex items-center gap-2.5">
-            <a href="https://github.com/veltus-studio" target="_blank" class="w-9 h-9 rounded-xl bg-slate-900 border border-white/10 hover:border-cyan-neon text-slate-300 hover:text-white flex items-center justify-center transition-all hover:scale-110" title="GitHub">
+            <a href="https://github.com/rejoanabir" target="_blank" class="w-9 h-9 rounded-xl bg-slate-900 border border-white/10 hover:border-cyan-neon text-slate-300 hover:text-white flex items-center justify-center transition-all hover:scale-110" title="Personal GitHub (@rejoanabir)">
               <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
               </svg>
+            </a>
+            <a href="https://github.com/veltus-studio" target="_blank" class="w-9 h-9 rounded-xl bg-slate-900 border border-white/10 hover:border-purple-400 text-slate-300 hover:text-white flex items-center justify-center transition-all hover:scale-110" title="Veltus Studio GitHub">
+              <span class="text-xs font-mono font-bold text-purple-400">V</span>
             </a>
             <a href="mailto:Veltusstudio@gmail.com" class="w-9 h-9 rounded-xl bg-slate-900 border border-white/10 hover:border-cyan-neon text-slate-300 hover:text-white flex items-center justify-center transition-all hover:scale-110" title="Email">
               <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24">
@@ -198,11 +208,8 @@
 
       <!-- Right Column: 3D Developer Desk Scene & Floating Motion Badges -->
       <div class="lg:col-span-6 relative flex justify-center items-center">
-        
-        <!-- Background Neon Radial Glow -->
         <div class="absolute w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-cyan-500/15 blur-3xl -z-10 animate-pulse"></div>
 
-        <!-- Floating 3D Code Badges around Desk -->
         <div class="hero-float-badge absolute -top-4 -left-4 sm:left-2 z-20 px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-cyan-400/40 text-cyan-neon font-mono font-bold text-xs shadow-xl animate-float-3d">
           &lt;/&gt; Kotlin v2.0
         </div>
@@ -215,13 +222,11 @@
           60 FPS Fluid UI
         </div>
 
-        <!-- 3D Desk Showcase Frame with Parallax Tilt -->
         <div id="hero-desk-scene" class="relative group cursor-pointer transition-transform duration-300 ease-out w-full max-w-lg">
-          <div class="relative rounded-3xl p-1 bg-gradient-to-b from-cyan-400/40 via-royal-600/30 to-transparent shadow-[0_0_50px_rgba(0,240,255,0.35)]">
+          <div class="relative rounded-3xl p-1 bg-gradient-to-b from-cyan-400/40 via-royal-600/30 to-purple-600/20 shadow-[0_0_50px_rgba(0,240,255,0.35)]">
             <div class="w-full bg-midnight/90 rounded-[22px] overflow-hidden relative border border-cyan-400/20 backdrop-blur-xl">
-              <img src="assets/images/veltus_hero_3d_desk.jpg" alt="Veltus Studio 3D Developer Desk Scene" class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-105">
+              <img src="assets/images/veltus_hero_3d_desk.jpg" alt="Rejoan Abir 3D Developer Desk" class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-105">
               
-              <!-- Bottom HUD Overlay -->
               <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between p-3 rounded-xl bg-obsidian/85 border border-white/10 backdrop-blur-md">
                 <div class="flex items-center gap-2">
                   <span class="w-2.5 h-2.5 rounded-full bg-cyan-neon animate-ping"></span>
@@ -241,19 +246,19 @@
 
 
   <!-- ========================================================
-       2. "GET TO KNOW ME!" & 4 STAT COUNTER CARDS SECTION
+       2. GET TO KNOW REJOAN ABIR & 4 STAT COUNTERS
        ======================================================== -->
   <section id="about-section" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative border-t border-white/5">
     
     <div class="text-center max-w-2xl mx-auto mb-14">
       <span class="px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-neon text-xs font-mono font-bold uppercase tracking-wider">
-        ABOUT US
+        ABOUT ME
       </span>
       <h2 class="font-display font-black text-3xl sm:text-4xl text-white mt-3 uppercase tracking-tight">
-        Get To Know Veltus Studio!
+        Get To Know Rejoan Abir!
       </h2>
       <p class="text-sm sm:text-base text-slate-400 mt-2">
-        A look into our engineering philosophy, credentials, and track record.
+        Software craftsman specializing in modern Android architecture and applied AI systems.
       </p>
     </div>
 
@@ -263,7 +268,7 @@
       <div class="lg:col-span-4 flex justify-center">
         <div class="tilt-card relative w-full max-w-sm rounded-3xl p-1 bg-gradient-to-b from-cyan-400/40 via-royal-600/20 to-transparent shadow-[0_0_40px_rgba(0,240,255,0.2)]">
           <div class="w-full bg-midnight/90 rounded-[22px] overflow-hidden p-4 border border-cyan-400/20 relative">
-            <img src="assets/images/veltus_avatar_waving.jpg" alt="Veltus Studio Developer Waving" class="w-full h-auto object-cover rounded-xl mb-3">
+            <img src="assets/images/veltus_avatar_waving.jpg" alt="Rejoan Abir Waving" class="w-full h-auto object-cover rounded-xl mb-3">
             <div class="text-center">
               <h3 class="font-display font-extrabold text-lg text-white">Rejoan Abir</h3>
               <p class="text-xs font-mono text-cyan-neon">Lead Android & AI Systems Engineer</p>
@@ -275,29 +280,28 @@
       <!-- Middle: Bio & Profile Details -->
       <div class="lg:col-span-4 flex flex-col justify-center">
         <h3 class="font-display font-extrabold text-2xl text-white mb-3">
-          Crafting Digital Experiences With Care.
+          Engineering High-Velocity Mobile Craft.
         </h3>
         <p class="text-sm text-slate-300 leading-relaxed mb-6">
-          We are passionate about Android development, edge intelligence, and responsive motion graphics. Every application is built from the ground up with modular clean architecture, zero-jank 120 FPS Compose interfaces, and modern creative tech.
+          I build sleek, responsive Android experiences where clean architecture powers creative visual systems. Founder of Veltus Studio, constantly pushing on-device AI intelligence, zero-latency state flows, and fluid 120 FPS Compose interfaces.
         </p>
 
-        <!-- Profile Details List matching reference -->
         <div class="space-y-3 font-mono text-xs text-slate-300 bg-slate-900/60 p-5 rounded-2xl border border-white/5">
           <div class="flex items-center gap-3">
-            <span class="text-cyan-neon">🏷️ Studio:</span>
-            <span class="text-white font-semibold">Veltus Studio</span>
+            <span class="text-cyan-neon">👤 Name:</span>
+            <span class="text-white font-semibold">Rejoan Abir</span>
           </div>
           <div class="flex items-center gap-3">
             <span class="text-cyan-neon">📍 Location:</span>
             <span class="text-white">Dhaka, Bangladesh 🇧🇩</span>
           </div>
           <div class="flex items-center gap-3">
-            <span class="text-cyan-neon">✉️ Email:</span>
+            <span class="text-cyan-neon">✉️ Contact:</span>
             <span class="text-cyan-300">Veltusstudio@gmail.com</span>
           </div>
           <div class="flex items-center gap-3">
             <span class="text-cyan-neon">⚡ Core Stack:</span>
-            <span class="text-white">Kotlin, Jetpack Compose, AI ML</span>
+            <span class="text-white">Kotlin, Compose, Gemini API, MVI</span>
           </div>
         </div>
       </div>
@@ -305,7 +309,6 @@
       <!-- Right: 4 Stat Counter Cards with Count-up Animations -->
       <div id="stats-container" class="lg:col-span-4 grid grid-cols-2 gap-4">
         
-        <!-- Stat 1: Projects -->
         <div class="stat-card-3d p-5 rounded-2xl flex flex-col items-start justify-between min-h-[140px] group cursor-pointer">
           <div class="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/40 text-purple-400 flex items-center justify-center text-lg mb-2 group-hover:scale-110 transition-transform">
             📁
@@ -318,7 +321,6 @@
           </div>
         </div>
 
-        <!-- Stat 2: Experience / Years -->
         <div class="stat-card-3d p-5 rounded-2xl flex flex-col items-start justify-between min-h-[140px] group cursor-pointer">
           <div class="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-500/40 text-cyan-neon flex items-center justify-center text-lg mb-2 group-hover:scale-110 transition-transform">
             🎓
@@ -331,7 +333,6 @@
           </div>
         </div>
 
-        <!-- Stat 3: Architecture Quality -->
         <div class="stat-card-3d p-5 rounded-2xl flex flex-col items-start justify-between min-h-[140px] group cursor-pointer">
           <div class="w-10 h-10 rounded-xl bg-lime-500/20 border border-lime-500/40 text-lime-neon flex items-center justify-center text-lg mb-2 group-hover:scale-110 transition-transform">
             🛡️
@@ -344,7 +345,6 @@
           </div>
         </div>
 
-        <!-- Stat 4: Technologies -->
         <div class="stat-card-3d p-5 rounded-2xl flex flex-col items-start justify-between min-h-[140px] group cursor-pointer">
           <div class="w-10 h-10 rounded-xl bg-royal-500/20 border border-royal-500/40 text-royal-400 flex items-center justify-center text-lg mb-2 group-hover:scale-110 transition-transform">
             ⚡
@@ -365,32 +365,30 @@
 
 
   <!-- ========================================================
-       3. TECHNOLOGIES WE WORK WITH (Skills Grid matching reference)
+       3. TECHNOLOGIES I WORK WITH
        ======================================================== -->
   <section id="skills-section" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative border-t border-white/5">
     
     <div class="text-center max-w-2xl mx-auto mb-12">
       <span class="px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-neon text-xs font-mono font-bold uppercase tracking-wider">
-        MY SKILLS
+        CORE SKILLS
       </span>
       <h2 class="font-display font-black text-3xl sm:text-4xl text-white mt-3 uppercase tracking-tight">
-        Technologies We Work With
+        Technologies I Work With
       </h2>
       <p class="text-sm text-slate-400 mt-2">
         Modern toolchains engineered for high-performance Android & AI systems.
       </p>
     </div>
 
-    <!-- Elevated Tech Grid matching reference style -->
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6">
       
-      <!-- Kotlin -->
       <div class="tilt-card glass-panel glass-panel-interactive rounded-2xl p-5 flex flex-col items-center justify-center text-center group cursor-pointer border border-white/5 hover:border-purple-500/50">
         <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center mb-3 group-hover:scale-110 transition-all">
           <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none">
-            <path d="M24 0H0V24H24L12 12L24 0Z" fill="url(#kotlin-grad-2)"/>
+            <path d="M24 0H0V24H24L12 12L24 0Z" fill="url(#kotlin-grad-p)"/>
             <defs>
-              <linearGradient id="kotlin-grad-2" x1="0" y1="24" x2="24" y2="0" gradientUnits="userSpaceOnUse">
+              <linearGradient id="kotlin-grad-p" x1="0" y1="24" x2="24" y2="0" gradientUnits="userSpaceOnUse">
                 <stop stop-color="#7F52FF"/>
                 <stop offset="0.5" stop-color="#C711E1"/>
                 <stop offset="1" stop-color="#E4485D"/>
@@ -402,7 +400,6 @@
         <p class="text-[11px] font-mono text-slate-400 mt-0.5">Core Language</p>
       </div>
 
-      <!-- Jetpack Compose -->
       <div class="tilt-card glass-panel glass-panel-interactive rounded-2xl p-5 flex flex-col items-center justify-center text-center group cursor-pointer border border-white/5 hover:border-cyan-400/50">
         <div class="w-14 h-14 rounded-2xl bg-cyan-400/10 border border-cyan-400/30 flex items-center justify-center mb-3 group-hover:scale-110 transition-all">
           <svg class="w-8 h-8 text-cyan-neon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -413,7 +410,6 @@
         <p class="text-[11px] font-mono text-slate-400 mt-0.5">Declarative UI</p>
       </div>
 
-      <!-- Android SDK -->
       <div class="tilt-card glass-panel glass-panel-interactive rounded-2xl p-5 flex flex-col items-center justify-center text-center group cursor-pointer border border-white/5 hover:border-green-400/50">
         <div class="w-14 h-14 rounded-2xl bg-green-500/10 border border-green-500/30 flex items-center justify-center mb-3 group-hover:scale-110 transition-all">
           <svg class="w-8 h-8 fill-green-400" viewBox="0 0 24 24">
@@ -424,7 +420,6 @@
         <p class="text-[11px] font-mono text-slate-400 mt-0.5">Native OS</p>
       </div>
 
-      <!-- GitHub Actions CI/CD -->
       <div class="tilt-card glass-panel glass-panel-interactive rounded-2xl p-5 flex flex-col items-center justify-center text-center group cursor-pointer border border-white/5 hover:border-royal-500/50">
         <div class="w-14 h-14 rounded-2xl bg-royal-500/10 border border-royal-500/30 flex items-center justify-center mb-3 group-hover:scale-110 transition-all">
           <svg class="w-8 h-8 text-royal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -435,7 +430,6 @@
         <p class="text-[11px] font-mono text-slate-400 mt-0.5">Automated CI/CD</p>
       </div>
 
-      <!-- AI Systems & LLMs -->
       <div class="tilt-card glass-panel glass-panel-interactive rounded-2xl p-5 flex flex-col items-center justify-center text-center group cursor-pointer border border-white/5 hover:border-cyan-400/50">
         <div class="w-14 h-14 rounded-2xl bg-cyan-400/10 border border-cyan-400/30 flex items-center justify-center mb-3 group-hover:scale-110 transition-all">
           <svg class="w-8 h-8 text-cyan-neon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -446,7 +440,6 @@
         <p class="text-[11px] font-mono text-slate-400 mt-0.5">Gemini & Edge ML</p>
       </div>
 
-      <!-- Coroutines & Flow -->
       <div class="tilt-card glass-panel glass-panel-interactive rounded-2xl p-5 flex flex-col items-center justify-center text-center group cursor-pointer border border-white/5 hover:border-blue-400/50">
         <div class="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center mb-3 group-hover:scale-110 transition-all">
           <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -457,7 +450,6 @@
         <p class="text-[11px] font-mono text-slate-400 mt-0.5">Async Flow</p>
       </div>
 
-      <!-- Clean Architecture -->
       <div class="tilt-card glass-panel glass-panel-interactive rounded-2xl p-5 flex flex-col items-center justify-center text-center group cursor-pointer border border-white/5 hover:border-lime-neon/50">
         <div class="w-14 h-14 rounded-2xl bg-lime-400/10 border border-lime-400/30 flex items-center justify-center mb-3 group-hover:scale-110 transition-all">
           <svg class="w-8 h-8 text-lime-neon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -468,7 +460,6 @@
         <p class="text-[11px] font-mono text-slate-400 mt-0.5">SOLID Principles</p>
       </div>
 
-      <!-- Material 3 & Design Systems -->
       <div class="tilt-card glass-panel glass-panel-interactive rounded-2xl p-5 flex flex-col items-center justify-center text-center group cursor-pointer border border-white/5 hover:border-pink-500/50">
         <div class="w-14 h-14 rounded-2xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center mb-3 group-hover:scale-110 transition-all">
           <svg class="w-8 h-8 text-pink-neon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -479,7 +470,6 @@
         <p class="text-[11px] font-mono text-slate-400 mt-0.5">Design Systems</p>
       </div>
 
-      <!-- Python & Backend -->
       <div class="tilt-card glass-panel glass-panel-interactive rounded-2xl p-5 flex flex-col items-center justify-center text-center group cursor-pointer border border-white/5 hover:border-yellow-400/50">
         <div class="w-14 h-14 rounded-2xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center mb-3 group-hover:scale-110 transition-all">
           <svg class="w-8 h-8 text-yellow-400" viewBox="0 0 24 24" fill="currentColor">
@@ -487,10 +477,9 @@
           </svg>
         </div>
         <h4 class="font-display font-bold text-sm text-white group-hover:text-cyan-neon transition-colors">Python</h4>
-        <p class="text-[11px] font-mono text-slate-400 mt-0.5">Data & Scripts</p>
+        <p class="text-[11px] font-mono text-slate-400 mt-0.5">Scripts & ML</p>
       </div>
 
-      <!-- Git & GitHub -->
       <div class="tilt-card glass-panel glass-panel-interactive rounded-2xl p-5 flex flex-col items-center justify-center text-center group cursor-pointer border border-white/5 hover:border-slate-400/50">
         <div class="w-14 h-14 rounded-2xl bg-slate-800/40 border border-white/20 flex items-center justify-center mb-3 group-hover:scale-110 transition-all">
           <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -507,22 +496,22 @@
 
 
   <!-- ========================================================
-       4. FEATURED PROJECTS ("Some of Our Recent Work")
+       4. FEATURED PROJECTS (Flagship & Personal Work)
        ======================================================== -->
   <section id="projects-section" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative border-t border-white/5">
     
     <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
       <div>
         <span class="px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-neon text-xs font-mono font-bold uppercase tracking-wider">
-          FEATURED PROJECTS
+          FEATURED WORK
         </span>
         <h2 class="font-display font-black text-2xl sm:text-4xl text-white mt-2 uppercase tracking-tight">
-          Some of Our Flagship Releases
+          Recent Flagship Releases
         </h2>
       </div>
 
-      <a href="https://github.com/veltus-studio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 border border-white/10 hover:border-cyan-neon text-xs font-mono text-cyan-neon hover:text-white transition-all group">
-        <span>View All on GitHub</span>
+      <a href="https://github.com/rejoanabir" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 border border-white/10 hover:border-cyan-neon text-xs font-mono text-cyan-neon hover:text-white transition-all group">
+        <span>View Personal GitHub</span>
         <span class="group-hover:translate-x-1 transition-transform">→</span>
       </a>
     </div>
@@ -543,8 +532,7 @@
       </button>
     </div>
 
-    <!-- 3-Column / Grid matching reference -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       
       <!-- Project 1: Glyph -->
       <div data-category="android ai" class="project-card tilt-card glass-panel glass-panel-interactive rounded-2xl p-5 border border-white/10 relative group overflow-hidden flex flex-col justify-between">
@@ -563,7 +551,7 @@
             Glyph
           </h3>
           <p class="text-xs text-slate-300 leading-relaxed mb-4">
-            Android AI companion app in Kotlin with local file attachments, optional live web search, and atmospheric conversation UI.
+            Autonomous Android AI companion in Kotlin with local file attachments, optional live web search, and atmospheric conversation UI.
           </p>
         </div>
         <div class="flex flex-wrap gap-1.5 pt-3 border-t border-white/5 text-[11px] font-mono text-slate-400">
@@ -600,7 +588,38 @@
         </div>
       </div>
 
-      <!-- Project 3: Project Nexus -->
+      <!-- Project 3: Aura Music Player (Personal GitHub repo!) -->
+      <div data-category="android creative" class="project-card tilt-card glass-panel glass-panel-interactive rounded-2xl p-5 border border-white/10 relative group overflow-hidden flex flex-col justify-between">
+        <div>
+          <div class="relative aspect-video rounded-xl overflow-hidden bg-gradient-to-br from-indigo-950 via-slate-900 to-purple-950 mb-4 border border-white/10 flex items-center justify-center p-4">
+            <div class="text-center">
+              <div class="w-12 h-12 mx-auto rounded-xl bg-purple-500/20 border border-purple-500/40 text-purple-300 flex items-center justify-center text-xl mb-1 group-hover:scale-110 transition-transform">
+                🎵
+              </div>
+              <span class="font-mono text-[11px] text-purple-300 tracking-wider">Aura Player</span>
+            </div>
+            <div class="absolute top-3 left-3 px-2.5 py-0.5 rounded bg-obsidian/85 border border-purple-400/40 text-[10px] font-mono font-bold text-purple-300">
+              OPEN SOURCE
+            </div>
+            <a href="https://github.com/rejoanabir/Aura-Music-Player" target="_blank" class="absolute top-3 right-3 w-8 h-8 rounded-lg bg-obsidian/85 border border-white/15 text-slate-300 group-hover:text-cyan-neon group-hover:border-cyan-neon flex items-center justify-center transition-all">
+              ↗
+            </a>
+          </div>
+          <h3 class="font-display font-extrabold text-xl text-white group-hover:text-cyan-neon transition-colors mb-1">
+            Aura Music Player
+          </h3>
+          <p class="text-xs text-slate-300 leading-relaxed mb-4">
+            A lightweight, modern offline Android music player engineered with clean UI, seamless playback caching, and intuitive playlists.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-1.5 pt-3 border-t border-white/5 text-[11px] font-mono text-slate-400">
+          <span class="px-2 py-0.5 rounded bg-slate-800/60">Android Audio</span>
+          <span class="px-2 py-0.5 rounded bg-slate-800/60">Compose</span>
+          <span class="px-2 py-0.5 rounded bg-slate-800/60">Media3</span>
+        </div>
+      </div>
+
+      <!-- Project 4: Project Nexus -->
       <div data-category="creative android" class="project-card tilt-card glass-panel glass-panel-interactive rounded-2xl p-5 border border-white/10 relative group overflow-hidden flex flex-col justify-between">
         <div>
           <div class="relative aspect-video rounded-xl overflow-hidden bg-gradient-to-br from-cyan-950 via-slate-900 to-indigo-950 mb-4 border border-white/10 flex items-center justify-center p-4">
@@ -618,7 +637,7 @@
             Project Nexus
           </h3>
           <p class="text-xs text-slate-300 leading-relaxed mb-4">
-            Curated creative tech showcase featuring hardware-accelerated AGSL runtime shaders, fluid touch physics, and tactile haptics.
+            Creative mobile UI lab featuring hardware-accelerated AGSL runtime shaders, fluid touch physics, and tactile haptics.
           </p>
         </div>
         <div class="flex flex-wrap gap-1.5 pt-3 border-t border-white/5 text-[11px] font-mono text-slate-400">
@@ -641,13 +660,13 @@
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
       <div>
         <span class="px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-neon text-xs font-mono font-bold uppercase tracking-wider">
-          MOTION SHOWCASE
+          MOTION GRAPHICS
         </span>
         <h2 class="font-display font-black text-2xl sm:text-4xl text-white mt-2 uppercase tracking-tight">
           Featured Motion Showreel
         </h2>
         <p class="text-sm text-slate-400 max-w-xl mt-1">
-          A glimpse of how Veltus Studio engineers fluid Android interfaces, AI systems, and responsive motion.
+          A glimpse into how I engineer fluid Android interfaces, AI systems, and responsive motion graphics.
         </p>
       </div>
 
@@ -657,14 +676,13 @@
       </button>
     </div>
 
-    <!-- Showreel Player Frame -->
     <div id="showreel-container" class="showreel-frame group cursor-pointer relative open-showreel-modal">
       <div class="px-5 py-3 bg-obsidian/90 border-b border-white/10 flex items-center justify-between text-xs font-mono text-slate-400">
         <div class="flex items-center gap-2">
           <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
           <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
           <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
-          <span class="ml-2 text-slate-300 hidden sm:inline">veltus_showreel_2026.mp4</span>
+          <span class="ml-2 text-slate-300 hidden sm:inline">rejoan_abir_showreel_2026.mp4</span>
         </div>
         <div class="flex items-center gap-3">
           <span class="px-2 py-0.5 rounded bg-cyan-950/80 border border-cyan-500/30 text-cyan-neon text-[10px] font-bold">4K 60FPS</span>
@@ -673,7 +691,7 @@
       </div>
 
       <div class="relative aspect-video w-full overflow-hidden bg-slate-950">
-        <img src="assets/images/showreel_banner.jpg" alt="Veltus Studio Motion Reel" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+        <img src="assets/images/showreel_banner.jpg" alt="Rejoan Abir Motion Reel" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
         <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/20 to-transparent"></div>
 
         <div class="absolute inset-0 flex items-center justify-center">
@@ -707,39 +725,159 @@
 
 
   <!-- ========================================================
-       6. ACHIEVEMENTS & ENGINEERING MILESTONES
+       6. LIVE GITHUB REPOSITORIES (Dynamic GitHub API Module)
+       ======================================================== -->
+  <section id="github-section" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative border-t border-white/5">
+    
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="w-2.5 h-2.5 rounded-full bg-green-400 animate-ping"></span>
+          <span class="text-xs font-mono text-green-400 font-bold uppercase tracking-wider">LIVE REPOSITORY FEED</span>
+        </div>
+        <h2 class="font-display font-black text-2xl sm:text-4xl text-white mt-1 uppercase tracking-tight">
+          GitHub Activity & Codebases
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-400 mt-1">
+          Synced live via GitHub REST API from <a href="https://github.com/rejoanabir" target="_blank" class="text-cyan-neon hover:underline">@rejoanabir</a>.
+        </p>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <span id="github-repo-count" class="px-3 py-1.5 rounded-xl bg-slate-900 border border-white/10 text-xs font-mono text-cyan-300 font-bold">
+          Active Repos
+        </span>
+        <a href="https://github.com/rejoanabir" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-cyan-400 text-black font-mono font-bold text-xs hover:scale-105 active:scale-95 transition-all">
+          Follow @rejoanabir ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- Live Grid (Populated via JS with static fallbacks) -->
+    <div id="live-github-repos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <!-- Static Fallback 1: Aura-Music-Player -->
+      <div class="tilt-card glass-panel p-5 rounded-2xl border border-white/10 hover:border-cyan-400/40 transition-all flex flex-col justify-between group">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="w-8 h-8 rounded-lg bg-cyan-400/10 border border-cyan-400/30 text-cyan-neon flex items-center justify-center text-sm font-mono font-bold">
+              &lt;/&gt;
+            </span>
+            <div class="flex items-center gap-3 text-xs font-mono text-slate-400">
+              <span class="flex items-center gap-1 text-yellow-400">★ 0</span>
+              <span class="flex items-center gap-1 text-slate-400">⑂ 0</span>
+            </div>
+          </div>
+          <h4 class="font-display font-bold text-lg text-white group-hover:text-cyan-neon transition-colors mb-1.5">
+            Aura-Music-Player
+          </h4>
+          <p class="text-xs text-slate-300 leading-relaxed mb-4 font-normal">
+            A lightweight, modern offline Android music player engineered with clean UI, seamless playback caching, and intuitive playlists.
+          </p>
+        </div>
+        <div class="flex items-center justify-between pt-3 border-t border-white/5 text-xs font-mono">
+          <span class="px-2.5 py-1 rounded bg-slate-800/80 text-cyan-300 border border-white/5 font-semibold">Kotlin</span>
+          <a href="https://github.com/rejoanabir/Aura-Music-Player" target="_blank" rel="noopener noreferrer" class="text-slate-400 group-hover:text-white flex items-center gap-1 transition-colors">
+            <span>View Source</span>
+            <span>↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Static Fallback 2: rejoanabir.github.io -->
+      <div class="tilt-card glass-panel p-5 rounded-2xl border border-white/10 hover:border-cyan-400/40 transition-all flex flex-col justify-between group">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/30 text-purple-400 flex items-center justify-center text-sm font-mono font-bold">
+              &lt;/&gt;
+            </span>
+            <div class="flex items-center gap-3 text-xs font-mono text-slate-400">
+              <span class="flex items-center gap-1 text-yellow-400">★ 0</span>
+              <span class="flex items-center gap-1 text-slate-400">⑂ 0</span>
+            </div>
+          </div>
+          <h4 class="font-display font-bold text-lg text-white group-hover:text-cyan-neon transition-colors mb-1.5">
+            rejoanabir.github.io
+          </h4>
+          <p class="text-xs text-slate-300 leading-relaxed mb-4 font-normal">
+            Personal portfolio and engineering showcase engineered with HTML5, Tailwind CSS, GSAP 3, and Web Audio API.
+          </p>
+        </div>
+        <div class="flex items-center justify-between pt-3 border-t border-white/5 text-xs font-mono">
+          <span class="px-2.5 py-1 rounded bg-slate-800/80 text-purple-300 border border-white/5 font-semibold">HTML / JS</span>
+          <a href="https://github.com/rejoanabir/rejoanabir.github.io" target="_blank" rel="noopener noreferrer" class="text-slate-400 group-hover:text-white flex items-center gap-1 transition-colors">
+            <span>View Source</span>
+            <span>↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Static Fallback 3: portfolio -->
+      <div class="tilt-card glass-panel p-5 rounded-2xl border border-white/10 hover:border-cyan-400/40 transition-all flex flex-col justify-between group">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="w-8 h-8 rounded-lg bg-royal-500/10 border border-royal-500/30 text-royal-400 flex items-center justify-center text-sm font-mono font-bold">
+              &lt;/&gt;
+            </span>
+            <div class="flex items-center gap-3 text-xs font-mono text-slate-400">
+              <span class="flex items-center gap-1 text-yellow-400">★ 0</span>
+              <span class="flex items-center gap-1 text-slate-400">⑂ 0</span>
+            </div>
+          </div>
+          <h4 class="font-display font-bold text-lg text-white group-hover:text-cyan-neon transition-colors mb-1.5">
+            portfolio
+          </h4>
+          <p class="text-xs text-slate-300 leading-relaxed mb-4 font-normal">
+            Modern mobile app engineering releases, visual UI systems, and interactive motion graphics.
+          </p>
+        </div>
+        <div class="flex items-center justify-between pt-3 border-t border-white/5 text-xs font-mono">
+          <span class="px-2.5 py-1 rounded bg-slate-800/80 text-royal-300 border border-white/5 font-semibold">JavaScript</span>
+          <a href="https://github.com/rejoanabir/portfolio" target="_blank" rel="noopener noreferrer" class="text-slate-400 group-hover:text-white flex items-center gap-1 transition-colors">
+            <span>View Source</span>
+            <span>↗</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       7. ACHIEVEMENTS & ENGINEERING STANDARDS
        ======================================================== -->
   <section id="milestones-section" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative border-t border-white/5">
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
       
-      <!-- Achievements Column -->
       <div>
         <div class="flex items-center gap-2 mb-6">
           <span class="w-8 h-8 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 flex items-center justify-center text-base">🏆</span>
-          <h3 class="font-display font-black text-2xl text-white uppercase tracking-tight">Achievements</h3>
+          <h3 class="font-display font-black text-2xl text-white uppercase tracking-tight">Milestones & Achievements</h3>
         </div>
 
         <div class="space-y-4">
           <div class="tilt-card glass-panel p-5 rounded-2xl border border-white/10">
-            <h4 class="font-display font-bold text-base text-white">Glyph AI Companion Release</h4>
-            <p class="text-xs font-mono text-cyan-300 mt-0.5">Flagship Android AI Application</p>
+            <h4 class="font-display font-bold text-base text-white">Glyph AI Companion Architecture</h4>
+            <p class="text-xs font-mono text-cyan-300 mt-0.5">Lead Architect & Developer</p>
             <p class="text-xs text-slate-300 mt-2 leading-relaxed">
-              Successfully engineered an autonomous AI companion app with local file attachment parsing, optional live web search, and custom atmospheric UI.
+              Designed end-to-end Kotlin architecture with local file attachment parsing, optional live web search, and custom atmospheric UI.
             </p>
           </div>
 
           <div class="tilt-card glass-panel p-5 rounded-2xl border border-white/10">
-            <h4 class="font-display font-bold text-base text-white">Automated CI/CD Pipeline</h4>
-            <p class="text-xs font-mono text-cyan-300 mt-0.5">GitHub Actions & Gradle Automation</p>
+            <h4 class="font-display font-bold text-base text-white">Full CI/CD Pipeline Automation</h4>
+            <p class="text-xs font-mono text-cyan-300 mt-0.5">DevOps & Build Infrastructure</p>
             <p class="text-xs text-slate-300 mt-2 leading-relaxed">
-              Standardized automated linting, unit testing, and release build artifacts across all mobile studio repositories.
+              Standardized automated linting, unit testing, and release build workflows across all studio mobile repositories.
             </p>
           </div>
 
           <div class="tilt-card glass-panel p-5 rounded-2xl border border-white/10">
-            <h4 class="font-display font-bold text-base text-white">120 FPS Fluid Compose Architecture</h4>
-            <p class="text-xs font-mono text-cyan-300 mt-0.5">Performance & Frame Pacing</p>
+            <h4 class="font-display font-bold text-base text-white">120 FPS Fluid Frame Pacing</h4>
+            <p class="text-xs font-mono text-cyan-300 mt-0.5">Zero-Jank Compose Optimization</p>
             <p class="text-xs text-slate-300 mt-2 leading-relaxed">
               Eliminated recomposition bottlenecks and dropped frames using immutable states, derivedStateOf, and hardware-accelerated shaders.
             </p>
@@ -747,7 +885,6 @@
         </div>
       </div>
 
-      <!-- Education & Standards Column -->
       <div>
         <div class="flex items-center gap-2 mb-6">
           <span class="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-neon flex items-center justify-center text-base">📚</span>
@@ -787,7 +924,7 @@
 
 
   <!-- ========================================================
-       7. TESTIMONIALS / ENGINEERING PHILOSOPHY CAROUSEL
+       8. TESTIMONIALS & PHILOSOPHY CAROUSEL
        ======================================================== -->
   <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto relative border-t border-white/5">
     
@@ -796,28 +933,25 @@
         PHILOSOPHY
       </span>
       <h2 class="font-display font-black text-3xl sm:text-4xl text-white mt-3 uppercase tracking-tight">
-        What Defines Our Craft
+        What Defines My Craft
       </h2>
     </div>
 
-    <!-- Interactive Carousel Box -->
     <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-white/10 relative">
       
-      <!-- Slide 1 -->
       <div class="testimonial-slide flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
         <div class="w-16 h-16 rounded-2xl bg-cyan-400/20 border border-cyan-400 text-cyan-neon flex items-center justify-center text-3xl font-display font-black shrink-0">
           “
         </div>
         <div>
           <p class="text-base sm:text-lg text-slate-200 leading-relaxed italic mb-4">
-            "At Veltus Studio, performance isn't an afterthought or a patch; it is the core foundation. A smooth 120 FPS interface communicates respect for the user."
+            "Performance isn't an afterthought or a patch; it is the core foundation. A smooth 120 FPS interface communicates respect for the user."
           </p>
           <p class="font-display font-bold text-white text-base">Rejoan Abir</p>
-          <p class="text-xs font-mono text-cyan-neon">Founder & Lead Engineer, Veltus Studio</p>
+          <p class="text-xs font-mono text-cyan-neon">Lead Android & AI Systems Engineer</p>
         </div>
       </div>
 
-      <!-- Slide 2 -->
       <div class="testimonial-slide hidden flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
         <div class="w-16 h-16 rounded-2xl bg-purple-500/20 border border-purple-500 text-purple-300 flex items-center justify-center text-3xl font-display font-black shrink-0">
           “
@@ -826,12 +960,11 @@
           <p class="text-base sm:text-lg text-slate-200 leading-relaxed italic mb-4">
             "AI without thoughtful UI is just raw computation. We build contextual systems where intelligent models elevate every interaction naturally."
           </p>
-          <p class="font-display font-bold text-white text-base">Veltus Architecture Doctrine</p>
+          <p class="font-display font-bold text-white text-base">Architecture Doctrine</p>
           <p class="text-xs font-mono text-purple-400">Core Engineering Principle</p>
         </div>
       </div>
 
-      <!-- Slide 3 -->
       <div class="testimonial-slide hidden flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
         <div class="w-16 h-16 rounded-2xl bg-lime-500/20 border border-lime-500 text-lime-neon flex items-center justify-center text-3xl font-display font-black shrink-0">
           “
@@ -845,7 +978,6 @@
         </div>
       </div>
 
-      <!-- Carousel Navigation Controls -->
       <div class="flex items-center justify-between pt-8 mt-6 border-t border-white/5">
         <div class="flex items-center gap-2">
           <button id="prev-testimonial" class="w-9 h-9 rounded-xl bg-slate-900 border border-white/10 hover:border-cyan-neon text-slate-300 hover:text-white flex items-center justify-center transition-all">
@@ -869,7 +1001,7 @@
 
 
   <!-- ========================================================
-       8. INTERACTIVE CONTACT SECTION & FORM
+       9. INTERACTIVE CONTACT SECTION & FORM
        ======================================================== -->
   <section id="contact-section" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative border-t border-white/5">
     
@@ -884,7 +1016,7 @@
           Have A Project In Mind?
         </h2>
         <p class="text-sm sm:text-base text-slate-300 mt-3 leading-relaxed">
-          Ready to engineer your next-generation Android application, integrate AI systems, or collaborate on a creative tech release? Send us a message.
+          Ready to engineer your next-generation Android application, integrate AI systems, or collaborate on a creative tech release? Send me a message.
         </p>
 
         <!-- Direct Email Pill Button -->
@@ -912,7 +1044,7 @@
         </div>
       </div>
 
-      <!-- Right: Interactive Contact Form matching reference -->
+      <!-- Right: Interactive Contact Form -->
       <div class="lg:col-span-7">
         <form id="contact-form" class="glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl relative">
           
@@ -929,12 +1061,12 @@
 
           <div class="mb-4">
             <label class="block text-xs font-mono text-slate-300 mb-2">Subject</label>
-            <input id="form-subject" type="text" placeholder="Android Project Collaboration" class="tech-input w-full px-4 py-3 rounded-xl text-sm font-sans placeholder-slate-500">
+            <input id="form-subject" type="text" placeholder="Android & AI Collaboration" class="tech-input w-full px-4 py-3 rounded-xl text-sm font-sans placeholder-slate-500">
           </div>
 
           <div class="mb-6">
             <label class="block text-xs font-mono text-slate-300 mb-2">Your Message</label>
-            <textarea id="form-message" rows="4" placeholder="Tell us about your project vision, timeline, or requirements..." required class="tech-input w-full px-4 py-3 rounded-xl text-sm font-sans placeholder-slate-500 resize-none"></textarea>
+            <textarea id="form-message" rows="4" placeholder="Tell me about your project vision, timeline, or architecture requirements..." required class="tech-input w-full px-4 py-3 rounded-xl text-sm font-sans placeholder-slate-500 resize-none"></textarea>
           </div>
 
           <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-500 via-royal-600 to-purple-600 text-white font-display font-extrabold text-sm tracking-wider uppercase shadow-[0_0_30px_rgba(0,240,255,0.4)] hover:shadow-[0_0_45px_rgba(0,240,255,0.7)] hover:scale-[1.01] active:scale-95 transition-all flex items-center justify-center gap-2">
@@ -953,17 +1085,18 @@
 
 
   <!-- ========================================================
-       FOOTER
+       10. FOOTER
        ======================================================== -->
   <footer class="pt-12 pb-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
     <div class="flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-slate-400 gap-4">
       <div class="flex items-center gap-2">
-        <span class="font-display font-black text-white text-sm">VELTUS STUDIO</span>
+        <span class="font-display font-black text-white text-sm">REJOAN ABIR</span>
         <span>— Crafted with Android precision & motion graphics.</span>
       </div>
       <div class="flex items-center gap-6">
         <a href="privacy.html" class="hover:text-cyan-neon transition-colors">Privacy Policy</a>
-        <a href="https://github.com/veltus-studio" target="_blank" class="hover:text-cyan-neon transition-colors">GitHub</a>
+        <a href="https://github.com/rejoanabir" target="_blank" class="hover:text-cyan-neon transition-colors">GitHub (@rejoanabir)</a>
+        <a href="https://github.com/veltus-studio" target="_blank" class="hover:text-cyan-neon transition-colors">Veltus Studio</a>
         <a href="#hero-section" class="hover:text-cyan-neon transition-colors">Back to Top ↑</a>
       </div>
     </div>
@@ -978,7 +1111,7 @@
           <span class="w-3 h-3 rounded-full bg-red-500"></span>
           <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
           <span class="w-3 h-3 rounded-full bg-green-500"></span>
-          <span class="font-mono text-xs sm:text-sm text-white ml-2 font-bold">Veltus Studio Motion Showcase Simulator</span>
+          <span class="font-mono text-xs sm:text-sm text-white ml-2 font-bold">Rejoan Abir Motion Showcase Simulator</span>
         </div>
         <button id="close-showreel-modal" class="p-2 rounded-lg bg-slate-900 border border-white/10 text-slate-300 hover:text-white hover:border-red-500 transition-all">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

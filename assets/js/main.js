@@ -1,13 +1,14 @@
 /**
- * Veltus Studio — Upgraded Interactive Motion Graphics Engine
+ * Rejoan Abir — Personal Portfolio & Engineering Showcase
+ * Autonomous Software Company Engineering Core
  * Features:
- * - GSAP ScrollTrigger reveals
- * - 3D Mouse Parallax & Dynamic Card Tilt
+ * - Dynamic Live GitHub API Integration (fetching real repos, stars, language stats)
+ * - 3D Mouse Parallax Tilt Physics with Specular Highlights
  * - Animated Number Counters (Count-up on scroll)
- * - Interactive Testimonial Carousel
- * - Functional Contact Form with Audio Feedback & Toast
- * - Interactive Canvas Starfield Particle Physics
- * - Futuristic Web Audio API SFX synthesizer
+ * - Interactive Showreel Motion Player Simulator
+ * - Category Project Filter Engine
+ * - Interactive Contact Form with LocalStorage Drafts & Web Audio SFX
+ * - Ambient Cyber Starfield Canvas Particle System
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAudio();
   initTilt();
   initCounters();
+  initLiveGitHubRepos();
   initTestimonials();
   initContactForm();
   initAnimations();
@@ -52,7 +54,7 @@ function initParticles() {
       this.size = Math.random() * 2 + 0.6;
       this.speedX = (Math.random() - 0.5) * 0.4;
       this.speedY = (Math.random() - 0.5) * 0.4 - 0.2;
-      this.color = Math.random() > 0.4 ? 'rgba(0, 240, 255,' : 'rgba(37, 99, 235,';
+      this.color = Math.random() > 0.4 ? 'rgba(0, 240, 255,' : 'rgba(168, 85, 247,';
       this.alpha = Math.random() * 0.5 + 0.2;
       this.alphaChange = (Math.random() - 0.5) * 0.01;
     }
@@ -140,7 +142,6 @@ function initAudio() {
     });
   }
 
-  // Attach micro-sounds to interactive elements
   document.querySelectorAll('button, a, .interactive-click').forEach((el) => {
     el.addEventListener('mouseenter', () => window.playSynthBlip(480, 'sine', 0.04, 0.02));
     el.addEventListener('click', () => window.playSynthBlip(880, 'triangle', 0.08, 0.05));
@@ -164,7 +165,6 @@ function initTilt() {
 
       heroScene.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
 
-      // Parallax floating badges around hero
       document.querySelectorAll('.hero-float-badge').forEach((badge, index) => {
         const factor = (index + 1) * 8;
         const bx = (x / rect.width) * factor;
@@ -188,7 +188,6 @@ function initTilt() {
     });
   }
 
-  // 3D tilt on all interactive cards
   document.querySelectorAll('.tilt-card').forEach((card) => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
@@ -232,7 +231,6 @@ function initCounters() {
           function updateCounter(currentTime) {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
-            // Ease-out cubic
             const easeProgress = 1 - Math.pow(1 - progress, 3);
             const currentVal = Math.floor(easeProgress * target);
 
@@ -255,7 +253,70 @@ function initCounters() {
 }
 
 /* ----------------------------------------------------
-   5. Interactive Testimonial Quote Carousel
+   5. Dynamic Live GitHub API Integration
+   ---------------------------------------------------- */
+async function initLiveGitHubRepos() {
+  const repoGrid = document.getElementById('live-github-repos');
+  const repoCountBadge = document.getElementById('github-repo-count');
+  if (!repoGrid) return;
+
+  try {
+    const res = await fetch('https://api.github.com/users/rejoanabir/repos?sort=updated&per_page=6');
+    if (!res.ok) throw new Error('API Rate limit or network issue');
+    const repos = await res.json();
+
+    if (Array.isArray(repos) && repos.length > 0) {
+      if (repoCountBadge) repoCountBadge.textContent = `${repos.length} Repositories`;
+
+      repoGrid.innerHTML = '';
+      repos.forEach((repo) => {
+        const lang = repo.language || 'Code';
+        const stars = repo.stargazers_count || 0;
+        const forks = repo.forks_count || 0;
+        const desc = repo.description || 'Modern software repository engineered by Rejoan Abir.';
+
+        const card = document.createElement('div');
+        card.className = 'tilt-card glass-panel p-5 rounded-2xl border border-white/10 hover:border-cyan-400/40 transition-all flex flex-col justify-between group';
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="w-8 h-8 rounded-lg bg-cyan-400/10 border border-cyan-400/30 text-cyan-neon flex items-center justify-center text-sm font-mono font-bold">
+                &lt;/&gt;
+              </span>
+              <div class="flex items-center gap-3 text-xs font-mono text-slate-400">
+                <span class="flex items-center gap-1 text-yellow-400">★ ${stars}</span>
+                <span class="flex items-center gap-1 text-slate-400">⑂ ${forks}</span>
+              </div>
+            </div>
+            <h4 class="font-display font-bold text-lg text-white group-hover:text-cyan-neon transition-colors mb-1.5 break-all">
+              ${repo.name}
+            </h4>
+            <p class="text-xs text-slate-300 leading-relaxed line-clamp-2 mb-4 font-normal">
+              ${desc}
+            </p>
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-white/5 text-xs font-mono">
+            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-cyan-300 border border-white/5 font-semibold">
+              ${lang}
+            </span>
+            <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="text-slate-400 group-hover:text-white flex items-center gap-1 transition-colors">
+              <span>View Source</span>
+              <span>↗</span>
+            </a>
+          </div>
+        `;
+        repoGrid.appendChild(card);
+      });
+      initTilt();
+    }
+  } catch (err) {
+    // Graceful fallback: Keep pre-rendered static cards
+    console.log('Using static GitHub showcase fallback:', err);
+  }
+}
+
+/* ----------------------------------------------------
+   6. Interactive Testimonials Carousel
    ---------------------------------------------------- */
 function initTestimonials() {
   const items = document.querySelectorAll('.testimonial-slide');
@@ -315,7 +376,6 @@ function initTestimonials() {
     });
   });
 
-  // Auto advance every 8 seconds
   setInterval(() => {
     if (document.hidden) return;
     currentIndex = (currentIndex + 1) % items.length;
@@ -324,49 +384,71 @@ function initTestimonials() {
 }
 
 /* ----------------------------------------------------
-   6. Interactive Contact Form with Validation & Audio
+   7. Interactive Contact Form with LocalStorage Memory
    ---------------------------------------------------- */
 function initContactForm() {
   const form = document.getElementById('contact-form');
+  const nameInput = document.getElementById('form-name');
+  const emailInput = document.getElementById('form-email');
+  const messageInput = document.getElementById('form-message');
+
   if (!form) return;
+
+  // Restore draft if any
+  try {
+    if (nameInput && localStorage.getItem('draft_name')) nameInput.value = localStorage.getItem('draft_name');
+    if (emailInput && localStorage.getItem('draft_email')) emailInput.value = localStorage.getItem('draft_email');
+    if (messageInput && localStorage.getItem('draft_msg')) messageInput.value = localStorage.getItem('draft_msg');
+  } catch (e) {}
+
+  // Auto-save draft
+  [nameInput, emailInput, messageInput].forEach((input) => {
+    if (!input) return;
+    input.addEventListener('input', () => {
+      try {
+        if (nameInput) localStorage.setItem('draft_name', nameInput.value);
+        if (emailInput) localStorage.setItem('draft_email', emailInput.value);
+        if (messageInput) localStorage.setItem('draft_msg', messageInput.value);
+      } catch (e) {}
+    });
+  });
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const nameInput = document.getElementById('form-name');
-    const emailInput = document.getElementById('form-email');
-    const messageInput = document.getElementById('form-message');
-
     if (!nameInput?.value.trim() || !emailInput?.value.trim() || !messageInput?.value.trim()) {
-      showToast('⚠️ Please fill out all required fields');
+      showToast('⚠️ Please complete all fields before sending.');
       return;
     }
 
     if (window.playSynthBlip) {
       window.playSynthBlip(600, 'triangle', 0.1, 0.06);
-      setTimeout(() => window.playSynthBlip(900, 'sine', 0.15, 0.08), 120);
+      setTimeout(() => window.playSynthBlip(920, 'sine', 0.15, 0.08), 120);
     }
 
-    showToast(`🚀 Thank you, ${nameInput.value.trim()}! Message sent successfully.`);
+    showToast(`🚀 Thank you, ${nameInput.value.trim()}! Your message is sent.`);
     form.reset();
+    try {
+      localStorage.removeItem('draft_name');
+      localStorage.removeItem('draft_email');
+      localStorage.removeItem('draft_msg');
+    } catch (e) {}
   });
 }
 
 /* ----------------------------------------------------
-   7. GSAP Kinetic Scroll Animations
+   8. GSAP Kinetic Scroll Animations
    ---------------------------------------------------- */
 function initAnimations() {
   if (typeof gsap === 'undefined') return;
 
   gsap.ticker.lagSmoothing(1000, 16);
 
-  // Stagger in Hero
   gsap.fromTo('#hero-badge', { opacity: 0, y: -15 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', clearProps: 'opacity,transform' });
   gsap.fromTo('#hero-title', { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.1, ease: 'power3.out', clearProps: 'opacity,transform' });
   gsap.fromTo('#hero-tagline', { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.2, ease: 'power2.out', clearProps: 'opacity,transform' });
   gsap.fromTo('.hero-cta-btn', { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.3, stagger: 0.1, ease: 'power2.out', clearProps: 'opacity,transform' });
   gsap.fromTo('#hero-desk-scene', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.9, delay: 0.2, ease: 'back.out(1.4)', clearProps: 'opacity,transform' });
 
-  // ScrollTrigger reveals
   if (typeof ScrollTrigger !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 
@@ -389,7 +471,7 @@ function initAnimations() {
 }
 
 /* ----------------------------------------------------
-   8. Project Category Filter Tabs
+   9. Project Category Filter Engine
    ---------------------------------------------------- */
 function initProjectFilters() {
   const filterBtns = document.querySelectorAll('.filter-btn');
@@ -409,7 +491,7 @@ function initProjectFilters() {
       projectCards.forEach((card) => {
         const category = card.getAttribute('data-category');
         if (filter === 'all' || category === filter || category.includes(filter)) {
-          card.style.display = 'block';
+          card.style.display = 'flex';
           if (typeof gsap !== 'undefined') {
             gsap.fromTo(card, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.35, ease: 'power2.out' });
           }
@@ -422,7 +504,7 @@ function initProjectFilters() {
 }
 
 /* ----------------------------------------------------
-   9. Showreel Modal & Video Simulator
+   10. Showreel Modal & Video Simulator
    ---------------------------------------------------- */
 function initShowreelModal() {
   const openBtns = document.querySelectorAll('.open-showreel-modal');
@@ -465,7 +547,7 @@ function initShowreelModal() {
         cancelAnimationFrame(simAnimId);
         return;
       }
-      ctx.fillStyle = 'rgba(7, 10, 18, 0.25)';
+      ctx.fillStyle = 'rgba(6, 8, 14, 0.25)';
       ctx.fillRect(0, 0, modalCanvas.width, modalCanvas.height);
 
       ctx.lineWidth = 2.5;
@@ -479,7 +561,7 @@ function initShowreelModal() {
       }
       ctx.stroke();
 
-      ctx.strokeStyle = '#2563eb';
+      ctx.strokeStyle = '#a855f7';
       ctx.beginPath();
       for (let x = 0; x < modalCanvas.width; x += 4) {
         const y = centerY + Math.cos(x * 0.015 - tick * 0.04) * 25;
@@ -496,7 +578,7 @@ function initShowreelModal() {
 }
 
 /* ----------------------------------------------------
-   10. Clipboard Copy & Toast Alert
+   11. Clipboard Copy & Toast Alert
    ---------------------------------------------------- */
 function initClipboard() {
   const copyBtn = document.getElementById('copy-email-btn');
@@ -524,7 +606,7 @@ function showToast(text) {
 }
 
 /* ----------------------------------------------------
-   11. Mobile Navigation Toggle
+   12. Mobile Navigation Toggle
    ---------------------------------------------------- */
 function initMobileMenu() {
   const menuBtn = document.getElementById('mobile-menu-btn');
