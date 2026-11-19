@@ -1,154 +1,966 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Veltus Studio — Crafting digital experiences with care.</title>
-  <style>
-    :root {
-      --bg: #080b10;
-      --surface: #0f151f;
-      --border: #1c2636;
-      --text: #f1f5f9;
-      --muted: #94a3b8;
-      --cyan: #00d2ff;
-      --blue: #2563eb;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veltus Studio — Android Dev • Mobile UI/UX • AI-Powered Apps</title>
+  <meta name="description" content="Veltus Studio builds sleek, boundary-pushing Android applications where utility meets visual craft. From AI-powered assistants to next-gen mobile experiences.">
+  <link rel="icon" type="image/jpeg" href="assets/images/veltus_logo.jpg">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#070a12',
+            midnight: '#0b1120',
+            cyan: {
+              300: '#67e8f9',
+              400: '#22d3ee',
+              500: '#06b6d4',
+              neon: '#00f0ff',
+            },
+            royal: {
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+            },
+            lime: {
+              neon: '#ccff00',
+            },
+            pink: {
+              neon: '#ec4899',
+            }
+          },
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            marker: ['"Permanent Marker"', 'cursive'],
+            hand: ['Caveat', 'cursive'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: radial-gradient(circle at 50% 0%, #0e1a2b 0%, var(--bg) 65%);
-      color: var(--text);
-      line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    .container {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 4.5rem 1.5rem;
-      flex: 1;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-    .mark {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 64px;
-      height: 64px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #162235, #0b111a);
-      border: 1px solid var(--border);
-      margin-bottom: 1.25rem;
-      box-shadow: 0 10px 30px rgba(0, 210, 255, 0.12);
-    }
-    h1 {
-      font-size: 2.25rem;
-      letter-spacing: 0.14em;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-    h1 span { color: var(--cyan); }
-    .tagline {
-      color: var(--muted);
-      font-size: 1.05rem;
-      letter-spacing: 0.04em;
-    }
-    .cta-row {
-      margin-top: 1.75rem;
-      display: flex;
-      gap: 0.75rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .btn {
-      padding: 0.65rem 1.25rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 600;
-      transition: transform 0.15s ease, border-color 0.15s ease;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--cyan), var(--blue));
-      color: #04080e;
-    }
-    .btn-secondary {
-      background: var(--surface);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .btn:hover { transform: translateY(-2px); border-color: var(--cyan); }
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 2rem;
-      text-align: center;
-    }
-    .card h2 {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-    }
-    .card p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      max-width: 480px;
-      margin: 0 auto;
-    }
-    .badge {
-      display: inline-block;
-      margin-top: 1.25rem;
-      font-size: 0.75rem;
-      padding: 0.25rem 0.75rem;
-      border-radius: 999px;
-      background: rgba(0, 210, 255, 0.1);
-      color: var(--cyan);
-      letter-spacing: 0.04em;
-    }
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 1.75rem 1.5rem;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
-    footer a { color: var(--muted); text-decoration: none; margin: 0 0.6rem; }
-    footer a:hover { color: var(--cyan); }
-  </style>
+  </script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
-<body>
-  <div class="container">
-    <header>
-      <div class="mark">
-        <svg width="32" height="32" viewBox="0 0 64 64" fill="none">
-          <path d="M10 14L32 52L24 52L4 14H10Z" fill="#CBD5E1"/>
-          <path d="M54 14L32 52L28 45L46 14H54Z" fill="#00D2FF"/>
+<body class="bg-obsidian text-slate-100 min-h-screen selection:bg-cyan-neon selection:text-black antialiased relative">
+
+  <!-- Background Particle Canvas -->
+  <canvas id="bg-particles" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+  <!-- Interactive SFX Toggle & Status Bar (Top Floating) -->
+  <div class="fixed top-4 right-4 z-50 flex items-center gap-2">
+    <button id="sound-toggle" class="glass-panel px-3 py-1.5 rounded-full text-xs font-mono font-semibold text-cyan-400 border border-cyan-500/30 hover:border-cyan-400 transition-all flex items-center gap-1.5 shadow-lg shadow-cyan-900/20 active:scale-95">
+      <span id="sound-icon">🔊 SFX ON</span>
+    </button>
+  </div>
+
+  <!-- Main Navigation Bar -->
+  <header class="fixed top-0 left-0 right-0 z-40 bg-obsidian/80 backdrop-blur-md border-b border-white/5 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#hero-section" class="flex items-center gap-3 group">
+        <div class="relative w-11 h-11 rounded-xl overflow-hidden p-0.5 bg-gradient-to-br from-cyan-400 via-royal-600 to-slate-800 shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform duration-300">
+          <img src="assets/images/veltus_logo.jpg" alt="Veltus Studio Logo" class="w-full h-full object-cover rounded-[10px]">
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-extrabold text-xl tracking-wider text-white flex items-center gap-1.5">
+            VELTUS <span class="text-cyan-neon font-light text-base">STUDIO</span>
+          </span>
+          <span class="text-[10px] font-mono tracking-widest text-slate-400 uppercase -mt-0.5">Android Craft</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#hero-section" class="hover:text-cyan-neon transition-colors">Home</a>
+        <a href="#showreel-section" class="hover:text-cyan-neon transition-colors">Showreel</a>
+        <a href="#projects-section" class="hover:text-cyan-neon transition-colors">Projects</a>
+        <a href="#skills-section" class="hover:text-cyan-neon transition-colors">Skills</a>
+        <a href="#about-section" class="hover:text-cyan-neon transition-colors">About</a>
+        <a href="#contact-section" class="hover:text-cyan-neon transition-colors">Contact</a>
+      </nav>
+
+      <!-- Right Header Actions -->
+      <div class="hidden sm:flex items-center gap-4">
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/80 border border-white/10 text-xs font-mono">
+          <span class="w-2 h-2 rounded-full bg-cyan-neon animate-ping"></span>
+          <span class="text-cyan-300">OPEN FOR DEV</span>
+        </div>
+        <a href="https://github.com/veltus-studio" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl bg-slate-900/90 border border-white/10 text-slate-300 hover:text-white hover:border-cyan-400 transition-all hover:scale-105 active:scale-95 shadow-md">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg bg-slate-900 border border-white/10 text-cyan-400 hover:text-white focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+
+    </div>
+
+    <!-- Mobile Dropdown Navigation -->
+    <div id="mobile-nav" class="hidden md:hidden bg-obsidian/95 border-b border-white/10 px-6 py-6 space-y-4">
+      <a href="#hero-section" class="block text-base font-medium text-slate-200 hover:text-cyan-neon">Home</a>
+      <a href="#showreel-section" class="block text-base font-medium text-slate-200 hover:text-cyan-neon">Showreel</a>
+      <a href="#projects-section" class="block text-base font-medium text-slate-200 hover:text-cyan-neon">Projects</a>
+      <a href="#skills-section" class="block text-base font-medium text-slate-200 hover:text-cyan-neon">Skills</a>
+      <a href="#about-section" class="block text-base font-medium text-slate-200 hover:text-cyan-neon">About</a>
+      <a href="#contact-section" class="block text-base font-medium text-slate-200 hover:text-cyan-neon">Contact</a>
+      <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+        <span class="text-xs font-mono text-cyan-300">Dhaka, Bangladesh</span>
+        <a href="https://github.com/veltus-studio" target="_blank" class="text-xs font-mono text-cyan-neon underline">GitHub Studio →</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================
+       HERO SECTION (Matches Reference Layout)
+       ======================================================== -->
+  <section id="hero-section" class="relative pt-28 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center relative z-10">
+      
+      <!-- Left Column: Typography & CTAs -->
+      <div class="lg:col-span-7 flex flex-col items-start relative">
+        
+        <!-- Graffiti "Hey, We're" with arrow doodle -->
+        <div id="hero-eyebrow" class="relative flex items-center gap-2 mb-2">
+          <span class="font-marker text-2xl sm:text-3xl text-pink-neon -rotate-3 tracking-wide">
+            Hey, We're
+          </span>
+          <svg class="w-10 h-10 text-cyan-neon -rotate-12 translate-y-1" viewBox="0 0 40 40" fill="none">
+            <path d="M5 25C12 24 22 18 28 8M28 8L20 8M28 8L27 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          
+          <!-- Crown Doodle on Top of Logo/Heading -->
+          <svg class="w-12 h-10 text-lime-neon absolute -top-8 left-40 rotate-12" viewBox="0 0 50 35" fill="none">
+            <path d="M5 28L10 10L25 22L40 10L45 28Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="10" cy="8" r="2.5" fill="currentColor"/>
+            <circle cx="25" cy="19" r="2.5" fill="currentColor"/>
+            <circle cx="40" cy="8" r="2.5" fill="currentColor"/>
+          </svg>
+        </div>
+
+        <!-- Massive Brand Heading -->
+        <h1 id="hero-title" class="font-display font-black text-5xl sm:text-7xl lg:text-8xl tracking-tight leading-none mb-4 uppercase">
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-cyan-300 drop-shadow-[0_0_35px_rgba(0,240,255,0.4)]">
+            VELTUS
+          </span>
+          <br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-neon via-sky-400 to-royal-500 font-marker text-4xl sm:text-6xl lg:text-7xl tracking-normal normal-case inline-block -rotate-1 -mt-2">
+            Studio
+          </span>
+        </h1>
+
+        <!-- Subtitles Tags matching reference layout -->
+        <div id="hero-subtitles" class="flex flex-wrap items-center gap-2 text-xs sm:text-sm font-mono text-cyan-300 tracking-wider font-semibold py-1.5 px-3 rounded-lg bg-cyan-950/40 border border-cyan-500/20 mb-6 backdrop-blur-sm">
+          <span>ANDROID DEV</span>
+          <span class="text-pink-neon">•</span>
+          <span>MOBILE UI/UX</span>
+          <span class="text-pink-neon">•</span>
+          <span>AI-POWERED APPS</span>
+          <span class="text-pink-neon">•</span>
+          <span>CREATIVE TECH</span>
+        </div>
+
+        <!-- Sticker Badges around Hero -->
+        <div class="relative w-full mb-8 mt-2 flex flex-wrap gap-4 items-center">
+          <!-- Yellow Sticker -->
+          <div class="hero-badge sticker-yellow px-4 py-2 rounded-md text-xs sm:text-sm tracking-wide font-black uppercase flex items-center gap-1.5 cursor-pointer">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+              <path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"/>
+            </svg>
+            <span>TURN APPS INTO EXPERIENCES!</span>
+          </div>
+
+          <!-- Outlined Badge -->
+          <div class="hero-badge px-4 py-2 rounded-md border border-cyan-400/40 bg-slate-900/70 text-slate-200 text-xs sm:text-sm font-mono tracking-wider flex items-center gap-2 shadow-inner">
+            <span class="w-2 h-2 rounded-full bg-lime-neon animate-pulse"></span>
+            <span>CLEAN CODE • ZERO COMPROMISE</span>
+          </div>
+        </div>
+
+        <!-- Call to Action Buttons -->
+        <div class="flex flex-wrap items-center gap-4 w-full sm:w-auto">
+          <!-- Glowing Primary Button -->
+          <a href="#projects-section" class="hero-cta-btn group relative px-8 py-4 rounded-full bg-gradient-to-r from-cyan-500 to-royal-600 text-black font-display font-black text-sm tracking-wider uppercase transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(0,240,255,0.5)] hover:shadow-[0_0_45px_rgba(0,240,255,0.8)] flex items-center gap-3">
+            <span class="w-6 h-6 rounded-full bg-black/20 flex items-center justify-center text-black group-hover:translate-x-1 transition-transform">▶</span>
+            <span>Explore Work</span>
+          </a>
+
+          <!-- Secondary Glass Outline Button -->
+          <a href="https://github.com/veltus-studio" target="_blank" rel="noopener noreferrer" class="hero-cta-btn px-7 py-4 rounded-full glass-panel border border-white/15 text-white font-display font-bold text-sm tracking-wider uppercase hover:border-cyan-400 hover:text-cyan-neon transition-all duration-300 hover:scale-105 active:scale-95 flex items-center gap-2">
+            <span>GitHub Studio</span>
+            <svg class="w-4 h-4 text-cyan-neon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Right Column: 3D Robot Mascot & Cyberpunk Badges -->
+      <div class="lg:col-span-5 relative flex justify-center items-center">
+        
+        <!-- Background Neon Radial Aura -->
+        <div class="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-cyan-500/15 blur-3xl -z-10 animate-pulse-glow"></div>
+        
+        <!-- Speech Bubble (Floating above Mascot) -->
+        <div class="absolute -top-10 sm:-top-14 right-2 sm:right-6 z-20 speech-bubble px-5 py-3 text-xs sm:text-sm font-marker tracking-wide text-slate-900 rotate-2 animate-bounce shadow-xl">
+          LET'S BUILD SOMETHING EXTRAORDINARY!
+        </div>
+
+        <!-- 3D Mascot Main Showcase Card -->
+        <div id="hero-mascot-card" class="relative group cursor-pointer transition-transform duration-300 ease-out">
+          
+          <!-- Outer Neon Border Halo Frame -->
+          <div class="relative w-72 sm:w-88 md:w-96 rounded-3xl p-1 bg-gradient-to-b from-cyan-400/50 via-royal-600/30 to-transparent shadow-[0_0_50px_rgba(0,240,255,0.35)]">
+            
+            <div class="w-full h-full bg-midnight/90 rounded-[22px] overflow-hidden relative border border-cyan-400/20 backdrop-blur-xl">
+              
+              <!-- Mascot Image -->
+              <img src="assets/images/veltus_robot_mascot.jpg" alt="Veltus Studio 3D Companion Mascot" class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-105">
+
+              <!-- Holographic HUD Overlay Tags -->
+              <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between p-2.5 rounded-xl bg-obsidian/85 border border-white/10 backdrop-blur-md">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-cyan-neon animate-ping"></span>
+                  <span class="text-xs font-mono font-bold text-white tracking-widest">VELTUS BOT v1.0</span>
+                </div>
+                <span class="text-[10px] font-mono text-cyan-300 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-500/30">AI COMPANION</span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Floating Doodles & Stickers near Mascot -->
+          <div class="absolute -bottom-6 -left-6 z-20 sticker-cyan px-3.5 py-1.5 rounded text-xs font-mono font-bold tracking-wider uppercase">
+            60 FPS FLUID
+          </div>
+
+          <!-- Doodle Star / Sparkles -->
+          <svg class="w-8 h-8 text-lime-neon absolute -top-4 -left-4 animate-spin-slow" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+          </svg>
+
+          <!-- Graffiti Crown / Smile -->
+          <svg class="w-10 h-10 text-pink-neon absolute -bottom-6 -right-4 rotate-12" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M10 13L11 15M21 13L22 15" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M10 20C12 23 20 23 22 20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Scroll Down Indicator matching reference -->
+    <div class="mt-16 sm:mt-20 flex justify-center items-center">
+      <a href="#showreel-section" class="flex items-center gap-2 text-xs font-mono tracking-widest text-slate-400 hover:text-cyan-neon transition-colors group">
+        <span class="w-6 h-9 rounded-full border-2 border-slate-600 group-hover:border-cyan-neon flex items-start justify-center p-1.5 transition-colors">
+          <span class="w-1 h-2 rounded-full bg-cyan-neon animate-bounce"></span>
+        </span>
+        <span>Scroll Down</span>
+      </a>
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       FEATURED SHOWREEL SECTION (Matches Reference Layout)
+       ======================================================== -->
+  <section id="showreel-section" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
+    
+    <!-- Section Title & Narrative -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <h2 class="font-display font-black text-2xl sm:text-3xl tracking-wider uppercase text-white">
+            FEATURED SHOWREEL
+          </h2>
+          <!-- Purple/Cyan scribble underline -->
+          <svg class="w-24 h-4 text-cyan-neon -translate-y-1" viewBox="0 0 100 12" fill="none">
+            <path d="M2 9C20 3 60 12 98 4" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="text-sm sm:text-base text-slate-400 max-w-xl font-normal">
+          A glimpse of how Veltus Studio engineers fluid Android interfaces, AI systems, and responsive motion.
+        </p>
+      </div>
+
+      <!-- Watch Now link -->
+      <button class="open-showreel-modal inline-flex items-center gap-2 text-cyan-neon hover:text-cyan-300 font-mono text-sm font-semibold group cursor-pointer">
+        <span>Watch Reel</span>
+        <span class="w-7 h-7 rounded-full bg-cyan-950 border border-cyan-400/40 flex items-center justify-center text-xs group-hover:scale-110 group-hover:bg-cyan-400 group-hover:text-black transition-all">▷</span>
+      </button>
+    </div>
+
+    <!-- Showreel Player Frame -->
+    <div id="showreel-container" class="showreel-frame group cursor-pointer relative open-showreel-modal">
+      
+      <!-- Studio Header Bar Mockup -->
+      <div class="px-5 py-3 bg-obsidian/90 border-b border-white/10 flex items-center justify-between text-xs font-mono text-slate-400">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+          <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+          <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
+          <span class="ml-2 text-slate-300 hidden sm:inline">veltus_showreel_2026.mp4</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="px-2 py-0.5 rounded bg-cyan-950/80 border border-cyan-500/30 text-cyan-neon text-[10px] font-bold">4K 60FPS</span>
+          <span class="text-slate-400 font-mono">02:45</span>
+        </div>
+      </div>
+
+      <!-- Showreel Banner Preview & Interactive Overlay -->
+      <div class="relative aspect-video w-full overflow-hidden bg-slate-950">
+        
+        <img src="assets/images/showreel_banner.jpg" alt="Veltus Studio Motion Reel" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+
+        <!-- Gradient Vignette -->
+        <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/20 to-transparent"></div>
+
+        <!-- Center Glowing Play Button Reticle -->
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="relative flex items-center justify-center">
+            <!-- Pulsing outer ring -->
+            <div class="absolute w-24 h-24 rounded-full bg-cyan-neon/30 animate-ping"></div>
+            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-cyan-400 to-royal-600 p-1 shadow-[0_0_40px_rgba(0,240,255,0.8)] group-hover:scale-110 transition-transform duration-300 flex items-center justify-center">
+              <div class="w-full h-full rounded-full bg-obsidian/80 backdrop-blur-md flex items-center justify-center text-cyan-neon group-hover:text-white transition-colors">
+                <svg class="w-9 h-9 fill-current translate-x-0.5" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Kinetic Slogan Overlay -->
+        <div class="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 pointer-events-none">
+          <div class="bg-obsidian/85 backdrop-blur-md px-4 py-2.5 rounded-xl border border-white/10">
+            <p class="font-display font-extrabold text-sm sm:text-lg text-white tracking-wider">
+              DREAM • BUILD • AUTOMATE • REPEAT.
+            </p>
+            <p class="text-xs font-mono text-cyan-300">Tap to launch interactive player</p>
+          </div>
+
+          <!-- Sticky Note Note matching reference ("SAME IDEAS DIFFERENT UNIVERSE") -->
+          <div class="sticker-yellow px-4 py-2.5 rounded-md text-xs font-marker tracking-wide uppercase shadow-2xl pointer-events-auto">
+            SAME CODE DIFFERENT UNIVERSE.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       OUR PROJECTS SECTION (Matches Reference Layout)
+       ======================================================== -->
+  <section id="projects-section" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
+    
+    <!-- Section Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
+      <div class="flex items-center gap-3">
+        <h2 class="font-display font-black text-2xl sm:text-3xl tracking-wider uppercase text-white">
+          OUR PROJECTS
+        </h2>
+        <svg class="w-16 h-4 text-pink-neon" viewBox="0 0 70 12" fill="none">
+          <path d="M2 6C15 2 25 10 40 5C55 1 60 9 68 6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
         </svg>
       </div>
-      <h1>VELTUS <span>STUDIO</span></h1>
-      <p class="tagline">Crafting digital experiences with care.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="https://github.com/veltus-studio" target="_blank">GitHub Organization</a>
-        <a class="btn btn-secondary" href="mailto:veltusstudio@gmail.com">Contact Studio</a>
-      </div>
-    </header>
 
-    <div class="card">
-      <h2>In the Workshop</h2>
-      <p>We are currently engineering our first flagship mobile release. Focused on clean architecture, speed, and thoughtful design.</p>
-      <span class="badge">Coming Soon</span>
+      <!-- View All on GitHub -->
+      <a href="https://github.com/veltus-studio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs sm:text-sm font-mono text-cyan-neon hover:text-white transition-colors group">
+        <span>View All Repositories</span>
+        <span class="group-hover:translate-x-1 transition-transform">→</span>
+      </a>
+    </div>
+
+    <!-- Category Filter Tabs -->
+    <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-10">
+      <button data-filter="all" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-mono font-bold bg-cyan-400 text-black border border-cyan-400 transition-all shadow-lg shadow-cyan-950/40">
+        All Projects (4)
+      </button>
+      <button data-filter="android" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-mono font-bold bg-slate-900/60 text-slate-300 border border-white/10 hover:border-cyan-400/40 hover:text-cyan-neon transition-all">
+        Android Apps
+      </button>
+      <button data-filter="ai" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-mono font-bold bg-slate-900/60 text-slate-300 border border-white/10 hover:border-cyan-400/40 hover:text-cyan-neon transition-all">
+        AI Systems
+      </button>
+      <button data-filter="creative" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-mono font-bold bg-slate-900/60 text-slate-300 border border-white/10 hover:border-cyan-400/40 hover:text-cyan-neon transition-all">
+        Creative Tech
+      </button>
+    </div>
+
+    <!-- Project Cards Grid (2x2 on desktop, matches reference) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <!-- Project 1: GLYPH -->
+      <div data-category="android ai" class="project-card glass-panel glass-panel-interactive rounded-2xl p-5 border border-white/10 relative group overflow-hidden">
+        
+        <!-- Thumbnail Container -->
+        <div class="relative aspect-video rounded-xl overflow-hidden bg-slate-950 mb-5 border border-white/10">
+          <img src="assets/images/glyph_preview.jpg" alt="Glyph AI Companion App" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-obsidian/90 via-transparent to-transparent"></div>
+          
+          <!-- Category Badge -->
+          <div class="absolute top-3 left-3 px-3 py-1 rounded-md bg-obsidian/85 border border-cyan-400/40 text-[11px] font-mono font-bold text-cyan-neon backdrop-blur-md">
+            AI COMPANION • KOTLIN
+          </div>
+
+          <!-- Top-right Arrow -->
+          <a href="https://github.com/veltus-studio" target="_blank" class="absolute top-3 right-3 w-9 h-9 rounded-lg bg-obsidian/85 border border-white/15 text-slate-300 group-hover:text-cyan-neon group-hover:border-cyan-neon flex items-center justify-center transition-all">
+            ↗
+          </a>
+        </div>
+
+        <!-- Project Meta & Title -->
+        <div class="flex items-start justify-between gap-4 mb-2">
+          <div>
+            <h3 class="font-display font-extrabold text-xl text-white group-hover:text-cyan-neon transition-colors">
+              GLYPH
+            </h3>
+            <p class="text-xs font-mono text-cyan-300 font-medium">Atmospheric AI Assistant</p>
+          </div>
+          <span class="text-xs font-mono text-slate-400 px-2.5 py-1 rounded bg-slate-900 border border-white/5">v1.2</span>
+        </div>
+
+        <p class="text-sm text-slate-300 font-normal leading-relaxed mb-4">
+          An Android AI companion app built in Kotlin featuring local file attachments, optional live web search, and a custom atmospheric visual UI designed for focused conversations.
+        </p>
+
+        <!-- Tech Tags -->
+        <div class="flex flex-wrap items-center gap-2 pt-3 border-t border-white/5 text-xs font-mono text-slate-400">
+          <span class="px-2 py-0.5 rounded bg-slate-800/60 border border-white/5">Kotlin</span>
+          <span class="px-2 py-0.5 rounded bg-slate-800/60 border border-white/5">Jetpack Compose</span>
+          <span class="px-2 py-0.5 rounded bg-slate-800/60 border border-white/5">Gemini API</span>
+          <span class="px-2 py-0.5 rounded bg-slate-800/60 border border-white/5">Room DB</span>
+        </div>
+
+      </div>
+
+      <!-- Project 2: VELTPULSE -->
+      <div data-category="android creative" class="project-card glass-panel glass-panel-interactive rounded-2xl p-5 border border-white/10 relative group overflow-hidden">
+        
+        <!-- Thumbnail Container -->
+        <div class="relative aspect-video rounded-xl overflow-hidden bg-slate-950 mb-5 border border-white/10">
+          <img src="assets/images/veltpulse_preview.jpg" alt="VeltPulse Mobile Engine" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-obsidian/90 via-transparent to-transparent"></div>
+          
+          <!-- Category Badge -->
+          <div class="absolute top-3 left-3 px-3 py-1 rounded-md bg-obsidian/85 border border-royal-500/50 text-[11px] font-mono font-bold text-royal-400 backdrop-blur-md">
+            FLAGSHIP • PERFORMANCE
+          </div>
+
+          <!-- Top-right Arrow -->
+          <a href="https://github.com/veltus-studio" target="_blank" class="absolute top-3 right-3 w-9 h-9 rounded-lg bg-obsidian/85 border border-white/15 text-slate-300 group-hover:text-cyan-neon group-hover:border-cyan-neon flex items-center justify-center transition-all">
+            ↗
+          </a>
+        </div>
+
+        <!-- Project Meta & Title -->
+        <div class="flex items-start justify-between gap-4 mb-2">
+          <div>
+            <h3 class="font-display font-extrabold text-xl text-white group-hover:text-cyan-neon transition-colors">
+              VELTPULSE
+            </h3>
+            <p class="text-xs font-mono text-cyan-300 font-medium">Responsive Mobile Engine</p>
+          </div>
+          <span class="text-xs font-mono text-slate-400 px-2.5 py-1 rounded bg-slate-900 border border-white/5">FLAGSHIP</span>
+        </div>
+
+        <p class="text-sm text-slate-300 font-normal leading-relaxed mb-4">
+          A flagship Veltus Studio mobile project focused on responsive performance, sleek modern UI, low-latency telemetry curves, and seamless user experience.
+        </p>
+
+        <!-- Tech Tags -->
+        <div class="flex flex-wrap items-center gap-2 pt-3 border-t border-white/5 text-xs font-mono text-slate-400">
+          <span class="px-2 py-0.5 rounded bg-slate-800/60 border border-white/5">Coroutines / Flow</span>
+          <span class="px-2 py-0.5 rounded bg-slate-800/60 border border-white/5">Clean Architecture</span>
+          <span class="px-2 py-0.5 rounded bg-slate-800/60 border border-white/5">Material 3</span>
+          <span class="px-2 py-0.5 rounded bg-slate-800/60 border border-white/5">CI/CD</span>
+        </div>
+
+      </div>
+
+      <!-- Project 3: SHOWCASE 03 -->
+      <div data-category="creative android" class="project-card glass-panel glass-panel-interactive rounded-2xl p-5 border border-white/10 relative group overflow-hidden">
+        
+        <!-- Thumbnail Container (Abstract Shaders Lab) -->
+        <div class="relative aspect-video rounded-xl overflow-hidden bg-gradient-to-br from-cyan-950 via-slate-900 to-indigo-950 mb-5 border border-white/10 flex items-center justify-center p-6">
+          <!-- Animated Shader Wave Canvas simulation -->
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto rounded-2xl bg-cyan-400/10 border border-cyan-400/30 flex items-center justify-center text-cyan-neon mb-2 group-hover:scale-110 transition-transform">
+              <svg class="w-8 h-8 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            </div>
+            <span class="font-mono text-xs text-cyan-300 tracking-widest uppercase">Project Nexus</span>
+          </div>
+
+          <div class="absolute top-3 left-3 px-3 py-1 rounded-md bg-obsidian/85 border border-lime-neon/40 text-[11px] font-mono font-bold text-lime-neon backdrop-blur-md">
+            COMING SOON • CREATIVE TECH
+          </div>
+
+          <span class="absolute top-3 right-3 w-9 h-9 rounded-lg bg-obsidian/85 border border-white/15 text-slate-400 flex items-center justify-center">
+            ⏳
+          </span>
+        </div>
+
+        <div class="flex items-start justify-between gap-4 mb-2">
+          <div>
+            <h3 class="font-display font-extrabold text-xl text-white group-hover:text-cyan-neon transition-colors">
+              SHOWCASE 03
+            </h3>
+            <p class="text-xs font-mono text-cyan-300 font-medium">AGSL Shaders & Kinetic Motion</p>
+          </div>
+          <span class="text-xs font-mono text-amber-400 px-2.5 py-1 rounded bg-amber-950/40 border border-amber-500/30">WIP</span>
+        </div>
+
+        <p class="text-sm text-slate-300 font-normal leading-relaxed mb-4">
+          Curated creative tech and mobile UI showcase featuring hardware-accelerated AGSL runtime shaders, fluid touch physics, and tactile visual feedback.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-2 pt-3 border-t border-white/5 text-xs font-mono text-slate-400">
+          <span class="px-2 py-0.5 rounded bg-slate-800/60 border border-white/5">AGSL Shaders</span>
+          <span class="px-2 py-0.5 rounded bg-slate-800/60 border border-white/5">Jetpack Compose Motion</span>
+          <span class="px-2 py-0.5 rounded bg-slate-800/60 border border-white/5">Haptic Audio</span>
+        </div>
+
+      </div>
+
+      <!-- Project 4: SHOWCASE 04 -->
+      <div data-category="ai creative" class="project-card glass-panel glass-panel-interactive rounded-2xl p-5 border border-white/10 relative group overflow-hidden">
+        
+        <!-- Thumbnail Container (Edge AI Prototype) -->
+        <div class="relative aspect-video rounded-xl overflow-hidden bg-gradient-to-br from-purple-950 via-slate-900 to-obsidian mb-5 border border-white/10 flex items-center justify-center p-6">
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto rounded-2xl bg-purple-500/10 border border-purple-400/30 flex items-center justify-center text-purple-400 mb-2 group-hover:scale-110 transition-transform">
+              <svg class="w-8 h-8 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <span class="font-mono text-xs text-purple-300 tracking-widest uppercase">Project Aura</span>
+          </div>
+
+          <div class="absolute top-3 left-3 px-3 py-1 rounded-md bg-obsidian/85 border border-pink-neon/40 text-[11px] font-mono font-bold text-pink-neon backdrop-blur-md">
+            COMING SOON • EXPERIMENTAL
+          </div>
+
+          <span class="absolute top-3 right-3 w-9 h-9 rounded-lg bg-obsidian/85 border border-white/15 text-slate-400 flex items-center justify-center">
+            ⏳
+          </span>
+        </div>
+
+        <div class="flex items-start justify-between gap-4 mb-2">
+          <div>
+            <h3 class="font-display font-extrabold text-xl text-white group-hover:text-cyan-neon transition-colors">
+              SHOWCASE 04
+            </h3>
+            <p class="text-xs font-mono text-cyan-300 font-medium">On-Device Edge Intelligence</p>
+          </div>
+          <span class="text-xs font-mono text-purple-400 px-2.5 py-1 rounded bg-purple-950/40 border border-purple-500/30">LAB</span>
+        </div>
+
+        <p class="text-sm text-slate-300 font-normal leading-relaxed mb-4">
+          Curated experimental app pushing local on-device neural processing, ultra-private contextual memory, and cross-platform Kotlin ecosystem synergies.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-2 pt-3 border-t border-white/5 text-xs font-mono text-slate-400">
+          <span class="px-2 py-0.5 rounded bg-slate-800/60 border border-white/5">On-Device ML</span>
+          <span class="px-2 py-0.5 rounded bg-slate-800/60 border border-white/5">Kotlin Multiplatform</span>
+          <span class="px-2 py-0.5 rounded bg-slate-800/60 border border-white/5">Edge Neural API</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       TOOLS & SKILLS SECTION (Matches Reference Layout)
+       ======================================================== -->
+  <section id="skills-section" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
+    
+    <!-- Section Header with Doodle Badge -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-12 gap-4">
+      <div class="flex items-center gap-3">
+        <h2 class="font-display font-black text-2xl sm:text-3xl tracking-wider uppercase text-white">
+          TOOLS & SKILLS
+        </h2>
+        <svg class="w-16 h-4 text-cyan-neon" viewBox="0 0 70 12" fill="none">
+          <path d="M2 6C15 2 25 10 40 5C55 1 60 9 68 6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <!-- Street Art Doodle Badge on Right matching reference ("CREATIVE MODE: ON") -->
+      <div class="flex items-center gap-2 self-start sm:self-auto">
+        <svg class="w-8 h-8 text-pink-neon -rotate-45" viewBox="0 0 24 24" fill="none">
+          <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="font-marker text-xs sm:text-sm text-pink-neon rotate-2 tracking-wide uppercase">
+          DEV MODE: ACTIVE [120 FPS]
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills Grid matching the dark cards with glowing tool badges -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 sm:gap-6">
+      
+      <!-- Skill 1: Kotlin -->
+      <div class="skill-card glass-panel glass-panel-interactive rounded-2xl p-6 flex flex-col items-center justify-center text-center group cursor-pointer border border-white/5 hover:border-purple-500/50">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-blue-500/20 border border-purple-500/30 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:shadow-[0_0_25px_rgba(168,85,247,0.4)] transition-all">
+          <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none">
+            <path d="M24 0H0V24H24L12 12L24 0Z" fill="url(#kotlin-grad)"/>
+            <defs>
+              <linearGradient id="kotlin-grad" x1="0" y1="24" x2="24" y2="0" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#7F52FF"/>
+                <stop offset="0.5" stop-color="#C711E1"/>
+                <stop offset="1" stop-color="#E4485D"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <h4 class="font-display font-bold text-sm text-white group-hover:text-cyan-neon transition-colors">Kotlin</h4>
+        <p class="text-[11px] font-mono text-slate-400 mt-1">Core & Coroutines</p>
+      </div>
+
+      <!-- Skill 2: Jetpack Compose -->
+      <div class="skill-card glass-panel glass-panel-interactive rounded-2xl p-6 flex flex-col items-center justify-center text-center group cursor-pointer border border-white/5 hover:border-cyan-400/50">
+        <div class="w-14 h-14 rounded-2xl bg-cyan-400/10 border border-cyan-400/30 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:shadow-[0_0_25px_rgba(0,240,255,0.4)] transition-all">
+          <svg class="w-8 h-8 text-cyan-neon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+          </svg>
+        </div>
+        <h4 class="font-display font-bold text-sm text-white group-hover:text-cyan-neon transition-colors">Jetpack Compose</h4>
+        <p class="text-[11px] font-mono text-slate-400 mt-1">Declarative UI</p>
+      </div>
+
+      <!-- Skill 3: Android SDK -->
+      <div class="skill-card glass-panel glass-panel-interactive rounded-2xl p-6 flex flex-col items-center justify-center text-center group cursor-pointer border border-white/5 hover:border-green-400/50">
+        <div class="w-14 h-14 rounded-2xl bg-green-500/10 border border-green-500/30 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:shadow-[0_0_25px_rgba(74,222,128,0.4)] transition-all">
+          <svg class="w-8 h-8 fill-green-400" viewBox="0 0 24 24">
+            <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4483.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.4126 13.8533 8.081 12 8.081s-3.5902.3316-5.1367.8687L4.841 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.152 5676l1.9972 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3432-4.1021-2.6889-7.5743-6.1185-9.4396"/>
+          </svg>
+        </div>
+        <h4 class="font-display font-bold text-sm text-white group-hover:text-cyan-neon transition-colors">Android Dev</h4>
+        <p class="text-[11px] font-mono text-slate-400 mt-1">Native Architecture</p>
+      </div>
+
+      <!-- Skill 4: GitHub Actions & CI/CD -->
+      <div class="skill-card glass-panel glass-panel-interactive rounded-2xl p-6 flex flex-col items-center justify-center text-center group cursor-pointer border border-white/5 hover:border-royal-500/50">
+        <div class="w-14 h-14 rounded-2xl bg-royal-500/10 border border-royal-500/30 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:shadow-[0_0_25px_rgba(37,99,235,0.4)] transition-all">
+          <svg class="w-8 h-8 text-royal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+        </div>
+        <h4 class="font-display font-bold text-sm text-white group-hover:text-cyan-neon transition-colors">GitHub Actions</h4>
+        <p class="text-[11px] font-mono text-slate-400 mt-1">CI/CD & Pipelines</p>
+      </div>
+
+      <!-- Skill 5: AI-Powered Applications -->
+      <div class="skill-card glass-panel glass-panel-interactive rounded-2xl p-6 flex flex-col items-center justify-center text-center group cursor-pointer border border-white/5 hover:border-cyan-400/50">
+        <div class="w-14 h-14 rounded-2xl bg-cyan-400/10 border border-cyan-400/30 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:shadow-[0_0_25px_rgba(0,240,255,0.4)] transition-all">
+          <svg class="w-8 h-8 text-cyan-neon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <h4 class="font-display font-bold text-sm text-white group-hover:text-cyan-neon transition-colors">AI Integration</h4>
+        <p class="text-[11px] font-mono text-slate-400 mt-1">LLMs & Edge ML</p>
+      </div>
+
+      <!-- Skill 6: Custom Visual UI Systems -->
+      <div class="skill-card glass-panel glass-panel-interactive rounded-2xl p-6 flex flex-col items-center justify-center text-center group cursor-pointer border border-white/5 hover:border-pink-500/50">
+        <div class="w-14 h-14 rounded-2xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:shadow-[0_0_25px_rgba(236,72,153,0.4)] transition-all">
+          <svg class="w-8 h-8 text-pink-neon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+          </svg>
+        </div>
+        <h4 class="font-display font-bold text-sm text-white group-hover:text-cyan-neon transition-colors">Visual Systems</h4>
+        <p class="text-[11px] font-mono text-slate-400 mt-1">Custom Design Systems</p>
+      </div>
+
+      <!-- Skill 7: Coroutines & Flow -->
+      <div class="skill-card glass-panel glass-panel-interactive rounded-2xl p-6 flex flex-col items-center justify-center text-center group cursor-pointer border border-white/5 hover:border-blue-400/50">
+        <div class="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:shadow-[0_0_25px_rgba(59,130,246,0.4)] transition-all">
+          <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <h4 class="font-display font-bold text-sm text-white group-hover:text-cyan-neon transition-colors">Coroutines & Flow</h4>
+        <p class="text-[11px] font-mono text-slate-400 mt-1">Asynchronous State</p>
+      </div>
+
+      <!-- Skill 8: Clean Architecture -->
+      <div class="skill-card glass-panel glass-panel-interactive rounded-2xl p-6 flex flex-col items-center justify-center text-center group cursor-pointer border border-white/5 hover:border-lime-neon/50">
+        <div class="w-14 h-14 rounded-2xl bg-lime-400/10 border border-lime-400/30 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:shadow-[0_0_25px_rgba(204,255,0,0.4)] transition-all">
+          <svg class="w-8 h-8 text-lime-neon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+          </svg>
+        </div>
+        <h4 class="font-display font-bold text-sm text-white group-hover:text-cyan-neon transition-colors">Clean Arch</h4>
+        <p class="text-[11px] font-mono text-slate-400 mt-1">SOLID & Modularization</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       ABOUT VELTUS STUDIO SECTION (Matches Reference Layout)
+       ======================================================== -->
+  <section id="about-section" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      
+      <!-- Left: Mascot Profile & Sticky Tape Note -->
+      <div class="lg:col-span-5 relative flex justify-center">
+        
+        <!-- Yellow Sticker Note ("UTILITY DISCIPLINE CRAFT") -->
+        <div class="absolute -top-6 -left-2 sm:left-4 z-20 sticker-yellow px-5 py-3 rounded text-xs sm:text-sm font-marker tracking-wide uppercase shadow-2xl">
+          UTILITY • DISCIPLINE • CRAFT
+        </div>
+
+        <!-- Mascot Frame -->
+        <div class="relative w-64 sm:w-80 rounded-3xl p-1 bg-gradient-to-tr from-cyan-400 via-royal-600 to-lime-neon shadow-[0_0_40px_rgba(0,240,255,0.25)]">
+          <div class="w-full h-full bg-midnight rounded-[22px] overflow-hidden p-4 relative">
+            <img src="assets/images/veltus_robot_mascot.jpg" alt="Veltus Studio Companion" class="w-full h-auto object-cover rounded-xl">
+            
+            <!-- Crown Doodle over Mascot -->
+            <svg class="w-10 h-8 text-lime-neon absolute top-2 right-2 rotate-12" viewBox="0 0 50 35" fill="none">
+              <path d="M5 28L10 10L25 22L40 10L45 28Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: Narrative & Pillars -->
+      <div id="about-content" class="lg:col-span-7 flex flex-col items-start">
+        
+        <div class="flex items-center gap-2 mb-2">
+          <h2 class="font-display font-black text-2xl sm:text-4xl tracking-tight uppercase text-white">
+            ABOUT VELTUS STUDIO
+          </h2>
+        </div>
+
+        <p class="text-base sm:text-lg text-slate-300 font-normal leading-relaxed mb-6">
+          Veltus Studio builds sleek, boundary-pushing Android applications where utility meets visual craft. From AI-powered assistants to next-gen mobile experiences, every release is engineered with clean architecture, fluid interfaces, and modern creative tech.
+        </p>
+
+        <!-- Key Pillars Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full mb-8">
+          <div class="p-4 rounded-xl bg-slate-900/80 border border-white/5">
+            <div class="text-cyan-neon font-display font-extrabold text-xl mb-1">60/120 FPS</div>
+            <p class="text-xs text-slate-400 font-mono">Ultra-fluid Jetpack Compose animations</p>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-900/80 border border-white/5">
+            <div class="text-lime-neon font-display font-extrabold text-xl mb-1">AI-FIRST</div>
+            <p class="text-xs text-slate-400 font-mono">Contextual on-device & cloud intelligence</p>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-900/80 border border-white/5">
+            <div class="text-pink-neon font-display font-extrabold text-xl mb-1">ROBUST</div>
+            <p class="text-xs text-slate-400 font-mono">Clean Architecture & Automated CI/CD</p>
+          </div>
+        </div>
+
+        <!-- Know More Link Button -->
+        <a href="https://github.com/veltus-studio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 text-cyan-neon hover:text-white font-mono text-sm font-bold group">
+          <span>Explore GitHub Ecosystem</span>
+          <span class="w-8 h-8 rounded-full bg-cyan-950 border border-cyan-400/40 flex items-center justify-center text-xs group-hover:translate-x-1 group-hover:bg-cyan-400 group-hover:text-black transition-all">→</span>
+        </a>
+
+        <!-- Street Art Doodle text on bottom right -->
+        <div class="mt-8 flex items-center gap-2 font-marker text-xs sm:text-sm text-cyan-300/80 tracking-widest uppercase">
+          <span>CREATE</span>
+          <span>•</span>
+          <span>AUTOMATE</span>
+          <span>•</span>
+          <span>GROW</span>
+          <svg class="w-6 h-6 text-pink-neon inline-block -rotate-12" viewBox="0 0 24 24" fill="none">
+            <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       FOOTER & CONTACT SECTION (Matches Reference Layout)
+       ======================================================== -->
+  <footer id="contact-section" class="pt-20 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/10 relative">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16">
+      
+      <!-- Big Graffiti Slogan on Left -->
+      <div class="lg:col-span-6">
+        <h3 class="font-marker text-4xl sm:text-6xl text-white tracking-normal leading-tight">
+          LET'S MAKE <br>
+          SOMETHING <span class="text-pink-neon underline decoration-cyan-neon decoration-wavy">CRAZY!</span>
+        </h3>
+        <p class="font-mono text-xs sm:text-sm text-slate-400 mt-4 max-w-md">
+          Ready to engineer your next-generation Android application or collaborate on an AI-powered project? Get in touch.
+        </p>
+      </div>
+
+      <!-- Contact Info Card on Right -->
+      <div class="lg:col-span-6 flex flex-col items-start lg:items-end gap-5">
+        
+        <!-- Interactive Email Pill Button with One-Click Copy -->
+        <button id="copy-email-btn" class="glass-panel px-6 py-4 rounded-2xl border border-cyan-400/40 hover:border-cyan-neon flex items-center gap-4 transition-all duration-300 hover:scale-105 active:scale-95 group shadow-[0_0_25px_rgba(0,240,255,0.15)]">
+          <div class="w-10 h-10 rounded-xl bg-cyan-400/10 border border-cyan-400/30 flex items-center justify-center text-cyan-neon group-hover:bg-cyan-neon group-hover:text-black transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <div class="text-left">
+            <p class="text-[10px] font-mono text-slate-400 uppercase tracking-widest">Public Contact Email</p>
+            <p class="font-mono font-bold text-sm sm:text-base text-white group-hover:text-cyan-neon transition-colors">
+              Veltusstudio@gmail.com
+            </p>
+          </div>
+          <span class="text-xs font-mono text-cyan-300 ml-2 px-2 py-1 rounded bg-cyan-950/80 border border-cyan-500/20">Click to Copy</span>
+        </button>
+
+        <!-- Location Badge -->
+        <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+          <svg class="w-4 h-4 text-cyan-neon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+          <span>Dhaka, Bangladesh 🇧🇩</span>
+        </div>
+
+        <!-- Social Icons Row matching reference -->
+        <div class="flex items-center gap-3">
+          <a href="https://github.com/veltus-studio" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-slate-900 border border-white/10 hover:border-cyan-neon text-slate-300 hover:text-white flex items-center justify-center transition-all hover:scale-110" title="GitHub">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+          </a>
+          <a href="mailto:Veltusstudio@gmail.com" class="w-10 h-10 rounded-xl bg-slate-900 border border-white/10 hover:border-cyan-neon text-slate-300 hover:text-white flex items-center justify-center transition-all hover:scale-110" title="Direct Email">
+            <svg class="w-5 h-5 fill-none stroke-current" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Right Badge: STAY CREATIVE matching reference -->
+        <div class="flex items-center gap-2">
+          <span class="font-marker text-xs sm:text-sm text-cyan-neon rotate-2 tracking-wide uppercase">
+            STAY CREATIVE
+          </span>
+          <svg class="w-6 h-5 text-lime-neon rotate-12" viewBox="0 0 50 35" fill="none">
+            <path d="M5 28L10 10L25 22L40 10L45 28Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Bottom Copyright -->
+    <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-slate-400 gap-4">
+      <p>© 2026 Veltus Studio. Crafted with Android precision & motion graphics.</p>
+      <div class="flex items-center gap-6">
+        <a href="#hero-section" class="hover:text-cyan-neon transition-colors">Back to Top ↑</a>
+      </div>
+    </div>
+
+  </footer>
+
+
+  <!-- ========================================================
+       INTERACTIVE SHOWREEL MODAL (Fullscreen Player Simulator)
+       ======================================================== -->
+  <div id="showreel-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl hidden items-center justify-center p-4 sm:p-8">
+    <div class="relative w-full max-w-5xl bg-obsidian rounded-3xl border border-cyan-400/40 overflow-hidden shadow-[0_0_60px_rgba(0,240,255,0.3)]">
+      
+      <!-- Modal Top Bar -->
+      <div class="px-6 py-4 bg-slate-950 border-b border-white/10 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="w-3 h-3 rounded-full bg-red-500"></span>
+          <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+          <span class="w-3 h-3 rounded-full bg-green-500"></span>
+          <span class="font-mono text-xs sm:text-sm text-white ml-2 font-bold">Veltus Studio Motion Showcase Simulator</span>
+        </div>
+        <button id="close-showreel-modal" class="p-2 rounded-lg bg-slate-900 border border-white/10 text-slate-300 hover:text-white hover:border-red-500 transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Canvas Player / Simulated Waveform Loop -->
+      <div class="relative aspect-video w-full bg-obsidian overflow-hidden flex items-center justify-center">
+        <canvas id="modal-showreel-canvas" class="absolute inset-0 w-full h-full"></canvas>
+
+        <!-- Centered HUD Graphic -->
+        <div class="relative z-10 text-center p-6 bg-obsidian/80 backdrop-blur-md rounded-2xl border border-cyan-500/30 max-w-md mx-4">
+          <div class="w-12 h-12 rounded-xl bg-cyan-400/20 border border-cyan-400 text-cyan-neon mx-auto mb-3 flex items-center justify-center animate-pulse">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+          <h4 class="font-display font-black text-xl text-white mb-2">Showreel Motion Ready</h4>
+          <p class="text-xs font-mono text-slate-300 leading-relaxed mb-4">
+            You can drop in your app walkthrough MP4 video or YouTube embed directly into <code class="text-cyan-neon font-bold">index.html</code> anytime!
+          </p>
+          <div class="flex items-center justify-center gap-1.5 h-6">
+            <span class="visualizer-bar" style="animation-delay: 0.1s"></span>
+            <span class="visualizer-bar" style="animation-delay: 0.3s"></span>
+            <span class="visualizer-bar" style="animation-delay: 0.5s"></span>
+            <span class="visualizer-bar" style="animation-delay: 0.2s"></span>
+            <span class="visualizer-bar" style="animation-delay: 0.4s"></span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <footer>
-    <span>© 2026 Veltus Studio</span> •
-    <a href="privacy.html">Privacy Policy</a> •
-    <a href="mailto:veltusstudio@gmail.com">veltusstudio@gmail.com</a>
-  </footer>
+
+  <!-- Neon Toast Notification -->
+  <div id="toast" class="glass-panel px-5 py-3 rounded-xl border border-cyan-400 text-cyan-neon font-mono text-xs flex items-center gap-2 shadow-[0_0_20px_rgba(0,240,255,0.4)]">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+    </svg>
+    <span id="toast-msg">Copied to clipboard!</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/main.js"></script>
 </body>
 </html>

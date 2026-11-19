@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=JetBrains+Mono:wght@400;600;700&family=Permanent+Marker&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800;900&display=swap');
+
+:root {
+  --bg-primary: #070a12;
+  --bg-card: rgba(13, 19, 33, 0.75);
+  --bg-card-hover: rgba(20, 29, 51, 0.85);
+  --cyan-glow: #00f0ff;
+  --cyan-subtle: rgba(0, 240, 255, 0.15);
+  --blue-royal: #2563eb;
+  --lime-accent: #ccff00;
+  --pink-accent: #ec4899;
+  --silver-bright: #f1f5f9;
+  --silver-muted: #94a3b8;
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --border-cyan-glow: rgba(0, 240, 255, 0.35);
+}
+
+/* Base resets & typography */
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-primary);
+  color: #f8fafc;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+  background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(0, 240, 255, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 85% 30%, rgba(37, 99, 235, 0.1) 0%, transparent 45%),
+    radial-gradient(circle at 50% 75%, rgba(0, 240, 255, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 90%, rgba(204, 255, 0, 0.04) 0%, transparent 35%);
+  background-attachment: fixed;
+  overflow-x: clip;
+  position: relative;
+}
+
+/* Subtle dot grid overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: 32px 32px;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Typography styles */
+.font-display {
+  font-family: 'Syne', sans-serif;
+}
+
+.font-marker {
+  font-family: 'Permanent Marker', cursive;
+}
+
+.font-hand {
+  font-family: 'Caveat', cursive;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #070a12;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00f0ff;
+  box-shadow: 0 0 10px #00f0ff;
+}
+
+/* Glassmorphism & Neon Borders */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+}
+
+.glass-panel-interactive {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-interactive:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-cyan-glow);
+  box-shadow: 0 12px 40px -10px rgba(0, 240, 255, 0.3);
+  transform: translateY(-4px);
+}
+
+/* Neon Glows */
+.glow-cyan-text {
+  text-shadow: 0 0 12px rgba(0, 240, 255, 0.6), 0 0 35px rgba(0, 240, 255, 0.3);
+}
+
+.glow-box-cyan {
+  box-shadow: 0 0 25px -4px rgba(0, 240, 255, 0.4);
+}
+
+.glow-box-cyan-intense {
+  box-shadow: 0 0 45px -5px rgba(0, 240, 255, 0.6), 0 0 20px rgba(37, 99, 235, 0.4);
+}
+
+.glow-box-lime {
+  box-shadow: 0 0 20px -3px rgba(204, 255, 0, 0.4);
+}
+
+.glow-box-pink {
+  box-shadow: 0 0 20px -3px rgba(236, 72, 153, 0.4);
+}
+
+/* Sticker & Tape styles matching the reference */
+.sticker-yellow {
+  background: #ccff00;
+  color: #050810;
+  font-weight: 800;
+  box-shadow: 4px 6px 0px #050810, 0 10px 20px rgba(204, 255, 0, 0.25);
+  transform: rotate(-3deg);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sticker-yellow:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+.sticker-cyan {
+  background: #00f0ff;
+  color: #050810;
+  font-weight: 800;
+  box-shadow: 3px 5px 0px #050810, 0 10px 20px rgba(0, 240, 255, 0.3);
+  transform: rotate(2.5deg);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sticker-cyan:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+.sticker-note-white {
+  background: #f8fafc;
+  color: #0a0e1a;
+  box-shadow: 4px 6px 0px rgba(0,0,0,0.8), 0 15px 30px rgba(0,0,0,0.5);
+  transform: rotate(3deg);
+}
+
+/* Street art graffiti doodle SVG styles */
+.doodle-stroke {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Floating animation for mascot and badges */
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(1deg);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.4));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 30px rgba(0, 240, 255, 0.85));
+  }
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-float {
+  animation: floatGentle 5s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spinSlow 20s linear infinite;
+}
+
+/* Speech bubble arrow */
+.speech-bubble {
+  position: relative;
+  background: #ffffff;
+  color: #070a12;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 240, 255, 0.2);
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -14px;
+  left: 32px;
+  border-width: 14px 14px 0;
+  border-style: solid;
+  border-color: #ffffff transparent;
+  display: block;
+  width: 0;
+}
+
+/* Video player & Showreel frame */
+.showreel-frame {
+  position: relative;
+  border-radius: 24px;
+  background: #090d16;
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 40px -10px rgba(0, 240, 255, 0.35), 0 20px 40px rgba(0,0,0,0.8);
+  overflow: hidden;
+}
+
+/* Wave audio visualizer bar */
+.visualizer-bar {
+  width: 4px;
+  border-radius: 2px;
+  background: #00f0ff;
+  animation: visualizerAnim 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes visualizerAnim {
+  0% {
+    height: 6px;
+    opacity: 0.4;
+  }
+  100% {
+    height: 28px;
+    opacity: 1;
+  }
+}
+
+/* Toast alert notification */
+#toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
