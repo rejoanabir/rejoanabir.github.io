@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vodraft for Android — Speak Freely, Write Instantly</title>
+  <meta name="description" content="System-wide AI voice dictation across every Android app. Pull down your Quick Settings Tile, speak naturally, and let Vodraft strip stutters, fillers, and self-corrections before inserting crisp text right into your cursor." />
+  <meta name="theme-color" content="#2563EB" />
+  <link rel="canonical" href="https://rejoanabir.xyz/vodraft/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rejoanabir.xyz/vodraft/" />
+  <meta property="og:title" content="Vodraft for Android — Speak Freely, Write Instantly" />
+  <meta property="og:description" content="System-wide AI voice dictation across every Android app. Powered by Groq Whisper & Llama 3.1 8B Instant with zero-setup Built-in mode." />
+  <meta property="og:image" content="https://rejoanabir.xyz/assets/img/vodraft-showcase.webp" />
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"Plus Jakarta Sans"', '"DM Sans"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            paper: '#FFFFFF',
+            alabaster: '#F6F7FA',
+            mist: '#EEF2F7',
+            ink: '#0B1220',
+            graphite: '#475569',
+            steel: '#8492A6',
+            cobalt: {
+              50: '#EFF6FF',
+              100: '#DBEAFE',
+              200: '#BFDBFE',
+              300: '#93C5FD',
+              500: '#3B82F6',
+              600: '#2563EB',
+              700: '#1D4ED8',
+            },
+            aura: {
+              cyan: '#0284C7',
+              indigo: '#4F46E5',
+            },
+            emeraldInk: {
+              bg: '#ECFDF5',
+              border: '#A7F3D0',
+              text: '#059669',
+            },
+            amberInk: {
+              bg: '#FFFBEB',
+              border: '#FDE68A',
+              text: '#D97706',
+            },
+            vermilion: {
+              bg: '#FFF1F2',
+              border: '#FECDD3',
+              text: '#E11D48',
+            },
+          },
+          backdropBlur: {
+            xs: '2px',
+          },
+          boxShadow: {
+            card: '0 2px 10px rgba(11, 18, 32, 0.04), 0 1px 2px rgba(11, 18, 32, 0.03)',
+            elevated: '0 14px 36px rgba(11, 18, 32, 0.08), 0 2px 8px rgba(11, 18, 32, 0.04)',
+            pill: '0 20px 44px rgba(11, 18, 32, 0.16), 0 4px 14px rgba(37, 99, 235, 0.10)',
+            phone: '0 32px 80px rgba(11, 18, 32, 0.14), 0 8px 24px rgba(11, 18, 32, 0.07)',
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- ==================== STICKY NAVIGATION ==================== -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80">
+    <div id="scroll-progress-bar" class="h-[2.5px] bg-gradient-to-r from-cobalt-600 via-aura-cyan to-aura-indigo transition-all duration-75" style="width: 0%"></div>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+        <a href="../index.html" class="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-full bg-alabaster hover:bg-slate-200/70 border border-slate-200 text-xs font-semibold text-graphite hover:text-ink transition shrink-0" title="Back to Abir's Portfolio">
+          <span aria-hidden="true">&larr;</span>
+          <span class="hidden sm:inline">Abir.</span>
+        </a>
+        <a href="#top" class="flex items-center gap-2 group shrink-0">
+          <div class="w-9 h-9 rounded-xl bg-white border border-slate-200 shadow-card flex items-center justify-center group-hover:border-cobalt-300 transition" id="nav-logo"></div>
+          <span class="font-display font-extrabold text-base sm:text-lg tracking-tight text-ink">Vodraft</span>
+        </a>
+      </div>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-graphite" aria-label="Primary Navigation">
+        <a href="#how-it-works" class="hover:text-ink transition">How It Works</a>
+        <a href="#ai-cleanup" class="hover:text-ink transition">AI Cleanup</a>
+        <a href="#engines" class="hover:text-ink transition">Dual Engine</a>
+        <a href="#privacy" class="hover:text-ink transition">Privacy</a>
+        <a href="#faq" class="hover:text-ink transition">FAQ</a>
+      </nav>
+
+      <div class="flex items-center gap-2.5">
+        <button data-open-download="true" class="px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full bg-cobalt-600 hover:bg-cobalt-700 text-white text-xs sm:text-sm font-semibold shadow-sm transition flex items-center gap-1.5 whitespace-nowrap shrink-0">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/></svg>
+          <span>Download APK</span>
+        </button>
+        <button id="mobile-menu-btn" class="md:hidden w-10 h-10 rounded-xl bg-alabaster border border-slate-200 flex items-center justify-center text-ink" aria-label="Open menu">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 py-3 space-y-1 text-sm font-medium text-graphite">
+      <a href="../index.html" class="mobile-nav-link block py-2 px-3 rounded-lg bg-alabaster text-ink font-semibold">&larr; Back to Abir's Portfolio</a>
+      <a href="#how-it-works" class="mobile-nav-link block py-2 px-3 rounded-lg hover:bg-alabaster hover:text-ink">How It Works</a>
+      <a href="#ai-cleanup" class="mobile-nav-link block py-2 px-3 rounded-lg hover:bg-alabaster hover:text-ink">AI Cleanup</a>
+      <a href="#engines" class="mobile-nav-link block py-2 px-3 rounded-lg hover:bg-alabaster hover:text-ink">Dual Engine</a>
+      <a href="#privacy" class="mobile-nav-link block py-2 px-3 rounded-lg hover:bg-alabaster hover:text-ink">Privacy</a>
+      <a href="#faq" class="mobile-nav-link block py-2 px-3 rounded-lg hover:bg-alabaster hover:text-ink">FAQ</a>
+    </div>
+  </header>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section id="top" class="relative overflow-hidden bg-white">
+    <div class="absolute inset-0 paper-grid opacity-40 pointer-events-none"></div>
+    <div id="hero-spotlight" class="absolute inset-0 pointer-events-none transition-opacity duration-500 opacity-0" style="background: radial-gradient(520px circle at 50% 40%, rgba(37,99,235,0.08), transparent 65%);"></div>
+    <div class="ambient-blob absolute -top-28 right-0 w-[520px] h-[520px] rounded-full bg-gradient-to-br from-cobalt-100/75 via-sky-100/55 to-transparent blur-3xl pointer-events-none"></div>
+    <div class="ambient-blob absolute bottom-0 -left-24 w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-indigo-100/50 via-cobalt-50/40 to-transparent blur-3xl pointer-events-none" style="animation-delay: -5s;"></div>
+
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-16 sm:pt-16 sm:pb-24">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+        <!-- Hero Copy -->
+        <div class="lg:col-span-6 space-y-6">
+          <div class="hero-enter inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-alabaster border border-slate-200 shadow-card">
+            <span class="w-2 h-2 rounded-full bg-emeraldInk-text"></span>
+            <span class="text-xs font-semibold text-ink">v1.0 for Android 8.0–15</span>
+            <span class="text-slate-300">·</span>
+            <span class="text-xs font-mono text-cobalt-600 font-semibold">100% Free</span>
+          </div>
+
+          <h1 class="hero-enter hero-enter-d1 font-display text-4xl sm:text-5xl lg:text-[54px] font-extrabold tracking-tight text-ink leading-[1.06]">
+            Speak Freely,<br />
+            <span class="text-cobalt-600">Write Instantly</span>
+          </h1>
+
+          <p class="hero-enter hero-enter-d2 text-base sm:text-lg text-graphite leading-relaxed max-w-xl">
+            System-wide AI voice dictation across <strong class="text-ink font-semibold">every Android app</strong>. Pull down your Quick Settings Tile, speak naturally, and let Vodraft strip stutters, fillers, and self-corrections before inserting crisp text right into your cursor.
+          </p>
+
+          <!-- Primary Download CTAs -->
+          <div class="hero-enter hero-enter-d3 flex flex-wrap items-center gap-3 pt-1">
+            <button data-open-download="true" class="cta-sheen h-14 px-7 rounded-full bg-cobalt-600 hover:bg-cobalt-700 text-white font-display font-bold text-sm sm:text-base shadow-elevated transition flex items-center gap-2.5 active:scale-[0.99]">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/></svg>
+              Download for Android
+              <span class="text-[11px] font-mono bg-white/15 px-2 py-0.5 rounded-full font-medium">APK</span>
+            </button>
+
+            <button id="hero-try-pill-btn" class="h-14 px-6 rounded-full bg-white hover:bg-alabaster text-ink border border-slate-300 font-display font-bold text-sm shadow-card transition flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-vermilion-text rec-dot"></span>
+              Try Live Pill Demo
+            </button>
+          </div>
+
+          <!-- Trust Specs Row -->
+          <div class="hero-enter hero-enter-d4 pt-3 grid grid-cols-2 sm:grid-cols-3 gap-3 max-w-lg text-xs text-graphite">
+            <div class="flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-emeraldInk-bg text-emeraldInk-text flex items-center justify-center shrink-0">
+                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+              </span>
+              <span>Sub-second Groq Whisper</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-emeraldInk-bg text-emeraldInk-text flex items-center justify-center shrink-0">
+                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+              </span>
+              <span>Zero-setup Built-in mode</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-emeraldInk-bg text-emeraldInk-text flex items-center justify-center shrink-0">
+                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+              </span>
+              <span>Never hides your keyboard</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Interactive Phone Mockup with Floating Pill -->
+        <div class="lg:col-span-6 flex justify-center relative py-2">
+          <!-- Floating SaaS Telemetry Chip: Top-Left -->
+          <div class="hidden xl:flex chip-float-a absolute -left-14 top-44 z-30 items-center gap-2.5 px-3.5 py-2.5 rounded-2xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-elevated">
+            <span class="w-8 h-8 rounded-xl bg-cobalt-50 text-cobalt-600 flex items-center justify-center shrink-0">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2.5L4.5 13.5h6.5L10 21.5l9.5-11.5h-6.5l0-7.5z"/></svg>
+            </span>
+            <div>
+              <p class="font-mono text-[11px] font-bold text-ink leading-none">380ms AI Latency</p>
+              <p class="text-[10px] text-emeraldInk-text font-semibold mt-0.5 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emeraldInk-text"></span>Groq Whisper v3</p>
+            </div>
+          </div>
+
+          <!-- Floating SaaS Telemetry Chip: Bottom-Right -->
+          <div class="hidden xl:flex chip-float-b absolute -right-12 bottom-28 z-30 items-center gap-2.5 px-3.5 py-2.5 rounded-2xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-elevated">
+            <span class="w-8 h-8 rounded-xl bg-emeraldInk-bg text-emeraldInk-text flex items-center justify-center shrink-0">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/></svg>
+            </span>
+            <div>
+              <p class="font-display text-[11px] font-bold text-ink leading-none">Stutters Cleaned</p>
+              <p class="font-mono text-[10px] text-graphite mt-0.5">-6 fillers · 0 typos</p>
+            </div>
+          </div>
+
+          <div class="phone-levitate w-full max-w-[368px] bg-ink rounded-[44px] p-[10px] shadow-phone border border-slate-800 relative">
+            <div class="bg-alabaster rounded-[34px] overflow-hidden flex flex-col h-[590px] relative">
+              <!-- Phone Status Bar -->
+              <div class="h-9 px-5 bg-white border-b border-slate-100 flex items-center justify-between text-[11px] font-mono font-semibold text-ink">
+                <span>9:41</span>
+                <div class="w-16 h-4 bg-ink rounded-full"></div>
+                <span class="text-cobalt-600">5G · 98%</span>
+              </div>
+
+              <!-- Simulated Host App (WhatsApp Chat) -->
+              <div class="px-4 py-3 bg-white border-b border-slate-200 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 font-display font-bold text-xs flex items-center justify-center">M</div>
+                  <div>
+                    <p class="font-display font-bold text-xs text-ink">Maya Lin · Product</p>
+                    <p class="text-[10px] text-emerald-600 font-medium">WhatsApp · Active Cursor</p>
+                  </div>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-alabaster border border-slate-200 text-steel">Any App</span>
+              </div>
+
+              <!-- Messages -->
+              <div class="flex-1 p-4 space-y-2.5 overflow-hidden">
+                <div class="max-w-[82%] bg-white border border-slate-200 rounded-2xl rounded-tl-sm px-3.5 py-2.5 text-xs text-ink shadow-card leading-relaxed">
+                  Hey! Can you send the updated launch timeline before the 3 PM sync?
+                </div>
+                <div class="max-w-[82%] ml-auto bg-cobalt-600 text-white rounded-2xl rounded-tr-sm px-3.5 py-2.5 text-xs leading-relaxed">
+                  Sure thing — dictating the summary right now with Vodraft.
+                </div>
+                <div id="hero-sent-bubble" class="hidden max-w-[85%] ml-auto bg-cobalt-600 text-white rounded-2xl rounded-tr-sm px-3.5 py-2.5 text-xs leading-relaxed"></div>
+              </div>
+
+              <!-- Input Bar -->
+              <div class="p-3 bg-white border-t border-slate-200 flex items-center gap-2">
+                <div id="hero-input-field" class="flex-1 rounded-2xl bg-alabaster border border-slate-200 px-3.5 py-2.5 text-xs text-steel min-h-[40px] leading-snug">
+                  Tap "Try Live Pill Demo" to dictate...
+                </div>
+                <button id="hero-send-msg" class="w-9 h-9 rounded-full bg-cobalt-600 hover:bg-cobalt-700 text-white flex items-center justify-center shrink-0 transition" aria-label="Send message">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                </button>
+              </div>
+
+              <!-- Simulated Soft Keyboard -->
+              <div class="px-2 pt-2 pb-3.5 bg-slate-100 border-t border-slate-200 select-none">
+                <div class="flex justify-center gap-1 mb-1 text-[10px] font-semibold text-ink">
+                  <span class="w-7 h-8 rounded bg-white shadow-sm flex items-center justify-center">Q</span>
+                  <span class="w-7 h-8 rounded bg-white shadow-sm flex items-center justify-center">W</span>
+                  <span class="w-7 h-8 rounded bg-white shadow-sm flex items-center justify-center">E</span>
+                  <span class="w-7 h-8 rounded bg-white shadow-sm flex items-center justify-center">R</span>
+                  <span class="w-7 h-8 rounded bg-white shadow-sm flex items-center justify-center">T</span>
+                  <span class="w-7 h-8 rounded bg-white shadow-sm flex items-center justify-center">Y</span>
+                  <span class="w-7 h-8 rounded bg-white shadow-sm flex items-center justify-center">U</span>
+                  <span class="w-7 h-8 rounded bg-white shadow-sm flex items-center justify-center">I</span>
+                  <span class="w-7 h-8 rounded bg-white shadow-sm flex items-center justify-center">O</span>
+                  <span class="w-7 h-8 rounded bg-white shadow-sm flex items-center justify-center">P</span>
+                </div>
+                <div class="flex justify-center gap-1 text-[10px] font-semibold text-ink">
+                  <span class="w-12 h-8 rounded bg-white shadow-sm flex items-center justify-center">?123</span>
+                  <span class="flex-1 max-w-[155px] h-8 rounded bg-white shadow-sm flex items-center justify-center text-steel">English (US)</span>
+                  <span class="w-12 h-8 rounded bg-cobalt-600 text-white shadow-sm flex items-center justify-center">Done</span>
+                </div>
+              </div>
+
+              <!-- HERO FLOATING OVERLAY PILL -->
+              <div id="hero-pill-slot" class="absolute inset-x-3 bottom-[152px] z-20 flex justify-center"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== WORKS EVERYWHERE MARQUEE ==================== -->
+  <section class="bg-alabaster border-y border-slate-200/80 py-7 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center gap-5">
+      <p class="text-xs font-bold uppercase tracking-wider text-steel shrink-0">Works seamlessly inside any Android app</p>
+      <div class="flex-1 w-full overflow-hidden marquee-mask">
+        <div class="marquee-track gap-3">
+          <span class="px-4 py-1.5 rounded-full bg-white border border-slate-200 text-xs font-semibold text-ink shadow-card inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>WhatsApp</span>
+          <span class="px-4 py-1.5 rounded-full bg-white border border-slate-200 text-xs font-semibold text-ink shadow-card inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500"></span>YouTube Search</span>
+          <span class="px-4 py-1.5 rounded-full bg-white border border-slate-200 text-xs font-semibold text-ink shadow-card inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cobalt-600"></span>Chrome</span>
+          <span class="px-4 py-1.5 rounded-full bg-white border border-slate-200 text-xs font-semibold text-ink shadow-card inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-500"></span>Gmail</span>
+          <span class="px-4 py-1.5 rounded-full bg-white border border-slate-200 text-xs font-semibold text-ink shadow-card inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-sky-500"></span>Google Keep &amp; Notes</span>
+          <span class="px-4 py-1.5 rounded-full bg-white border border-slate-200 text-xs font-semibold text-ink shadow-card inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-indigo-500"></span>Instagram &amp; X</span>
+          <span class="px-4 py-1.5 rounded-full bg-white border border-slate-200 text-xs font-semibold text-ink shadow-card inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-teal-500"></span>Slack &amp; Teams</span>
+          <!-- Duplicate track for seamless infinite loop -->
+          <span class="px-4 py-1.5 rounded-full bg-white border border-slate-200 text-xs font-semibold text-ink shadow-card inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>WhatsApp</span>
+          <span class="px-4 py-1.5 rounded-full bg-white border border-slate-200 text-xs font-semibold text-ink shadow-card inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500"></span>YouTube Search</span>
+          <span class="px-4 py-1.5 rounded-full bg-white border border-slate-200 text-xs font-semibold text-ink shadow-card inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cobalt-600"></span>Chrome</span>
+          <span class="px-4 py-1.5 rounded-full bg-white border border-slate-200 text-xs font-semibold text-ink shadow-card inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-500"></span>Gmail</span>
+          <span class="px-4 py-1.5 rounded-full bg-white border border-slate-200 text-xs font-semibold text-ink shadow-card inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-sky-500"></span>Google Keep &amp; Notes</span>
+          <span class="px-4 py-1.5 rounded-full bg-white border border-slate-200 text-xs font-semibold text-ink shadow-card inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-indigo-500"></span>Instagram &amp; X</span>
+          <span class="px-4 py-1.5 rounded-full bg-white border border-slate-200 text-xs font-semibold text-ink shadow-card inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-teal-500"></span>Slack &amp; Teams</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== HOW IT WORKS (3 STEPS) ==================== -->
+  <section id="how-it-works" class="bg-white py-16 sm:py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="max-w-2xl">
+        <span class="text-xs font-bold uppercase tracking-wider text-cobalt-600">Zero-Disruption Hero Flow</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-ink tracking-tight mt-2">
+          From Notification Shade to polished text in 3 seconds.
+        </h2>
+        <p class="text-sm sm:text-base text-graphite mt-3 leading-relaxed">
+          No switching keyboards, no opening a separate notes app, and no losing your place. Vodraft floats cleanly above your active text field.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+        <!-- Step 1 -->
+        <div class="saas-card reveal-on-scroll p-6 rounded-3xl bg-alabaster border border-slate-200/90 flex flex-col justify-between gap-5">
+          <div class="flex items-center justify-between">
+            <div class="w-11 h-11 rounded-2xl bg-white border border-slate-200 text-cobalt-600 shadow-card flex items-center justify-center">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="8" height="7" rx="2.5"/><rect x="13" y="4" width="8" height="7" rx="2.5"/><rect x="3" y="13" width="8" height="7" rx="2.5"/><path d="M17 14v5M14.5 16.5h5"/></svg>
+            </div>
+            <span class="font-mono text-xs font-bold text-steel">01</span>
+          </div>
+          <div>
+            <h3 class="font-display font-bold text-lg text-ink">Tap the Quick Settings Tile</h3>
+            <p class="text-sm text-graphite mt-1.5 leading-relaxed">
+              Pull down your Android notification shade from any app and tap <strong class="text-ink">Vodraft</strong>. A draggable floating pill appears above your keyboard without stealing cursor focus.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="saas-card reveal-on-scroll p-6 rounded-3xl bg-alabaster border border-slate-200/90 flex flex-col justify-between gap-5">
+          <div class="flex items-center justify-between">
+            <div class="w-11 h-11 rounded-2xl bg-white border border-slate-200 text-vermilion-text shadow-card flex items-center justify-center">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5 10.5a7 7 0 0 0 14 0"/><path d="M12 17.5v4"/><path d="M8.5 21.5h7"/></svg>
+            </div>
+            <span class="font-mono text-xs font-bold text-steel">02</span>
+          </div>
+          <div>
+            <h3 class="font-display font-bold text-lg text-ink">Speak &amp; Pause Naturally</h3>
+            <p class="text-sm text-graphite mt-1.5 leading-relaxed">
+              Adaptive Voice Activity Detection adjusts to room noise. Tune your auto-stop silence delay from <span class="font-mono text-ink font-semibold">3.0s</span> to <span class="font-mono text-ink font-semibold">10.0s</span> so Vodraft never cuts you off mid-thought.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="saas-card reveal-on-scroll p-6 rounded-3xl bg-alabaster border border-slate-200/90 flex flex-col justify-between gap-5">
+          <div class="flex items-center justify-between">
+            <div class="w-11 h-11 rounded-2xl bg-white border border-slate-200 text-emeraldInk-text shadow-card flex items-center justify-center">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8.5" y="2.5" width="7" height="3.5" rx="1.2"/><path d="M9 12.5h6M12 9.5v6"/></svg>
+            </div>
+            <span class="font-mono text-xs font-bold text-steel">03</span>
+          </div>
+          <div>
+            <h3 class="font-display font-bold text-lg text-ink">AI Polishes &amp; Auto-Inserts</h3>
+            <p class="text-sm text-graphite mt-1.5 leading-relaxed">
+              Review cleaned text in the expandable Confirm Dock—or turn off confirmation to auto-insert directly into the focused field via 3-tier universal insertion.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== INTERACTIVE AI CLEANUP SHOWCASE ==================== -->
+  <section id="ai-cleanup" class="bg-alabaster border-y border-slate-200/80 py-16 sm:py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-10">
+        <div class="max-w-2xl">
+          <span class="text-xs font-bold uppercase tracking-wider text-cobalt-600">Llama 3.1 8B Instant + Offline Cleaner</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-ink tracking-tight mt-2">
+            Speak messy. Paste immaculate.
+          </h2>
+          <p class="text-sm sm:text-base text-graphite mt-2">
+            Removes stutters, repeated phrases, verbal fillers, and mid-sentence self-corrections—while preserving numbers, times, URLs, and your language.
+          </p>
+        </div>
+
+        <!-- Scenario Selector Pills -->
+        <div class="flex flex-wrap gap-2 bg-white p-1.5 rounded-2xl border border-slate-200 shadow-card">
+          <button data-scenario="meeting" class="scenario-btn px-3.5 py-2 rounded-xl text-xs font-semibold transition">WhatsApp Chat</button>
+          <button data-scenario="search" class="scenario-btn px-3.5 py-2 rounded-xl text-xs font-semibold transition">YouTube Search</button>
+          <button data-scenario="email" class="scenario-btn px-3.5 py-2 rounded-xl text-xs font-semibold transition">Gmail Reply</button>
+        </div>
+      </div>
+
+      <!-- Animated Voice-to-Ink Signal Beam -->
+      <div class="hidden lg:flex items-center justify-center -mb-3 relative z-10 pointer-events-none">
+        <svg width="260" height="28" viewBox="0 0 260 28" fill="none" aria-hidden="true">
+          <path d="M10 14 H250" stroke="#E2E8F0" stroke-width="2" stroke-linecap="round"/>
+          <path d="M10 14 H250" stroke="url(#beamGrad)" stroke-width="2.5" stroke-linecap="round" class="signal-beam-path"/>
+          <circle cx="130" cy="14" r="11" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="1.5"/>
+          <path d="M130 9l1.2 3.3 3.3 1.2-3.3 1.2L130 18l-1.2-3.3-3.3-1.2 3.3-1.2L130 9z" fill="#2563EB"/>
+          <defs>
+            <linearGradient id="beamGrad" x1="0" y1="0" x2="260" y2="0" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#2563EB"/>
+              <stop offset="0.5" stop-color="#0284C7"/>
+              <stop offset="1" stop-color="#4F46E5"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 reveal-on-scroll">
+        <!-- Raw Spoken Input -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-7 shadow-card flex flex-col justify-between gap-5">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-vermilion-bg border border-vermilion-border text-vermilion-text text-xs font-bold">
+                <span class="w-2 h-2 rounded-full bg-vermilion-text"></span>
+                Raw Spoken Transcript
+              </span>
+              <span id="scenario-app-badge" class="font-mono text-xs text-steel">WhatsApp</span>
+            </div>
+            <p id="scenario-raw" class="text-base sm:text-lg text-graphite leading-relaxed italic"></p>
+          </div>
+          <div id="scenario-tags" class="flex flex-wrap gap-2 pt-3 border-t border-slate-100 text-[11px] font-mono text-steel"></div>
+        </div>
+
+        <!-- Vodraft AI Polished Output -->
+        <div class="bg-white rounded-3xl border-2 border-cobalt-600/20 p-6 sm:p-7 shadow-elevated flex flex-col justify-between gap-5 relative overflow-hidden">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emeraldInk-bg border border-emeraldInk-border text-emeraldInk-text text-xs font-bold">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/></svg>
+                Vodraft Polished Output
+              </span>
+              <label class="inline-flex items-center gap-2 text-xs font-semibold text-ink cursor-pointer">
+                <span>AI Cleaner</span>
+                <button id="toggle-demo-cleaner" type="button" role="switch" aria-checked="true" class="w-9 h-5 rounded-full bg-cobalt-600 p-0.5 transition-colors">
+                  <span class="block w-4 h-4 rounded-full bg-white shadow-sm translate-x-4 transition-transform"></span>
+                </button>
+              </label>
+            </div>
+            <p id="scenario-clean" class="font-display text-lg sm:text-xl font-bold text-ink leading-relaxed"></p>
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-slate-100 text-xs">
+            <span id="scenario-note" class="text-cobalt-700 font-medium"></span>
+            <span class="font-mono text-emeraldInk-text font-semibold">~380ms</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== DUAL ENGINE & ARCHITECTURE BENTO ==================== -->
+  <section id="engines" class="bg-white py-16 sm:py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="max-w-2xl mb-10">
+        <span class="text-xs font-bold uppercase tracking-wider text-cobalt-600">Dual Speech-to-Text Engine</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-ink tracking-tight mt-2">
+          Choose sub-second Cloud AI or zero-setup Built-in.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+        <!-- Groq Whisper Card -->
+        <div class="saas-card reveal-on-scroll md:col-span-7 p-7 rounded-3xl bg-alabaster border border-slate-200 flex flex-col justify-between gap-6">
+          <div>
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-2xl bg-cobalt-600 text-white flex items-center justify-center shadow-sm">
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2.5L4.5 13.5h6.5L10 21.5l9.5-11.5h-6.5l0-7.5z"/></svg>
+              </div>
+              <span class="px-3 py-1 rounded-full bg-cobalt-50 border border-cobalt-200 text-cobalt-700 text-xs font-bold">Recommended · Free Key</span>
+            </div>
+            <h3 class="font-display text-2xl font-extrabold text-ink mt-5">Groq Whisper AI</h3>
+            <p class="text-sm text-graphite mt-2 leading-relaxed">
+              Powered by <code class="font-mono text-xs bg-white px-1.5 py-0.5 rounded border border-slate-200 text-ink">whisper-large-v3-turbo</code> and <code class="font-mono text-xs bg-white px-1.5 py-0.5 rounded border border-slate-200 text-ink">Llama 3.1 8B Instant</code>. Captures 16kHz mono PCM audio up to 5.5 minutes with adaptive room-noise VAD and sub-second transcription. Grab a free Groq key in 30 seconds—no credit card needed.
+            </p>
+          </div>
+          <div class="grid grid-cols-3 gap-3 pt-4 border-t border-slate-200/80 text-center">
+            <div class="bg-white rounded-2xl p-3 border border-slate-200/80">
+              <p class="font-mono font-bold text-base text-ink">&lt;0.5s</p>
+              <p class="text-[11px] text-graphite">Cloud Speed</p>
+            </div>
+            <div class="bg-white rounded-2xl p-3 border border-slate-200/80">
+              <p class="font-mono font-bold text-base text-ink">5.5 min</p>
+              <p class="text-[11px] text-graphite">Max Clip</p>
+            </div>
+            <div class="bg-white rounded-2xl p-3 border border-slate-200/80">
+              <p class="font-mono font-bold text-base text-ink">$0</p>
+              <p class="text-[11px] text-graphite">Free Tier</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Native Built-in Card -->
+        <div class="saas-card reveal-on-scroll md:col-span-5 p-7 rounded-3xl bg-white border border-slate-200 shadow-card flex flex-col justify-between gap-6">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-alabaster border border-slate-200 text-ink flex items-center justify-center">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 18h3"/></svg>
+            </div>
+            <h3 class="font-display text-2xl font-extrabold text-ink mt-5">Native Built-in</h3>
+            <p class="text-sm text-graphite mt-2 leading-relaxed">
+              Want zero setup? Skip the API key and use Android's native <code class="font-mono text-xs bg-alabaster px-1.5 py-0.5 rounded border border-slate-200 text-ink">SpeechRecognizer</code> with live streaming partial words inside the floating pill and instant offline rule-based cleanup.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-alabaster border border-slate-200/80 text-xs text-graphite">
+            <strong class="text-ink">Auto-Fallback:</strong> Even if you're offline or remove your key, Vodraft smoothly falls back to the offline rule-based cleaner.
+          </div>
+        </div>
+
+        <!-- Privacy & Security Card -->
+        <div id="privacy" class="saas-card reveal-on-scroll md:col-span-6 p-7 rounded-3xl bg-white border border-slate-200 shadow-card space-y-3">
+          <div class="w-11 h-11 rounded-2xl bg-emeraldInk-bg text-emeraldInk-text flex items-center justify-center">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l7.5 3v6.2c0 4.6-3.1 8.6-7.5 9.8-4.4-1.2-7.5-5.2-7.5-9.8V5.5l7.5-3z"/><path d="M9 12.2l2.1 2.1 4.1-4.3"/></svg>
+          </div>
+          <h3 class="font-display text-xl font-extrabold text-ink">Hardware-Backed Encryption &amp; FLAG_SECURE</h3>
+          <p class="text-sm text-graphite leading-relaxed">
+            Your API keys and JWT tokens are encrypted on-device with <strong class="text-ink">Android Keystore (AES-256-GCM)</strong>. Sensitive screens block screenshots via <code class="font-mono text-xs bg-alabaster px-1 rounded">FLAG_SECURE</code>, and signing out wipes cached local secrets from disk.
+          </p>
+        </div>
+
+        <!-- 3-Tier Insertion Card -->
+        <div class="saas-card reveal-on-scroll md:col-span-6 p-7 rounded-3xl bg-white border border-slate-200 shadow-card space-y-3">
+          <div class="w-11 h-11 rounded-2xl bg-cobalt-50 text-cobalt-600 flex items-center justify-center">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="6"/><circle cx="8" cy="12" r="2" fill="currentColor" stroke="none"/><path d="M13 12h4.5"/></svg>
+          </div>
+          <h3 class="font-display text-xl font-extrabold text-ink">3-Tier Universal Text Insertion</h3>
+          <p class="text-sm text-graphite leading-relaxed">
+            First attempts direct <code class="font-mono text-xs bg-alabaster px-1 rounded">ACTION_SET_TEXT</code> (ignoring placeholder hints with smart spacing), falls back to Clipboard + <code class="font-mono text-xs bg-alabaster px-1 rounded">ACTION_PASTE</code>, and finally Clipboard + Toast so dictated text is never lost.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== DEDICATED DOWNLOAD HUB ==================== -->
+  <section id="download" class="bg-alabaster border-y border-slate-200/80 py-16 sm:py-24">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="bg-white rounded-[32px] border border-slate-200 shadow-elevated p-7 sm:p-12 overflow-hidden relative">
+        <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-cobalt-50 blur-2xl pointer-events-none"></div>
+
+        <div class="relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cobalt-50 border border-cobalt-200 text-cobalt-700 text-xs font-bold">
+              <span class="w-2 h-2 rounded-full bg-cobalt-600"></span>
+              Direct Android Release · v1.0.0
+            </div>
+            <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-ink tracking-tight">
+              Ready to stop typing on glass?
+            </h2>
+            <p class="text-sm sm:text-base text-graphite leading-relaxed">
+              Install Vodraft in under a minute. Sign in with Google or Email OTP to sync your preferences across devices, grant 3 transparent Android permissions, and dictate anywhere.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-3 pt-2">
+              <button data-open-download="true" class="cta-sheen h-14 px-8 rounded-full bg-cobalt-600 hover:bg-cobalt-700 text-white font-display font-bold text-sm sm:text-base shadow-elevated transition flex items-center gap-2.5">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/></svg>
+                Download Vodraft APK (v1.0)
+              </button>
+              <a href="#top" class="h-14 px-6 rounded-full bg-alabaster hover:bg-mist border border-slate-200 text-ink font-semibold text-sm flex items-center justify-center transition">
+                Back to Live Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- Release Specs Card -->
+          <div class="lg:col-span-5 bg-alabaster rounded-2xl border border-slate-200 p-5 space-y-3 text-xs">
+            <div class="flex items-center justify-between pb-2.5 border-b border-slate-200">
+              <span class="font-display font-bold text-sm text-ink">Release Specs</span>
+              <span class="font-mono text-emeraldInk-text font-semibold bg-emeraldInk-bg px-2 py-0.5 rounded-full border border-emeraldInk-border">Verified Build</span>
+            </div>
+            <div class="flex justify-between"><span class="text-graphite">Package ID</span><span class="font-mono font-semibold text-ink">com.vocal.text</span></div>
+            <div class="flex justify-between"><span class="text-graphite">Android Support</span><span class="font-mono font-semibold text-ink">Android 8.0–15 (API 26–35)</span></div>
+            <div class="flex justify-between"><span class="text-graphite">UI Framework</span><span class="font-mono font-semibold text-ink">Jetpack Compose M3</span></div>
+            <div class="flex justify-between"><span class="text-graphite">Permissions</span><span class="font-semibold text-ink">Mic · Overlay · Accessibility</span></div>
+
+            <!-- Google Play Notify Mini-Form -->
+            <form id="play-waitlist-form" class="pt-3 border-t border-slate-200 space-y-2">
+              <label for="waitlist-email" class="block text-[11px] font-bold text-ink">Notify me on Google Play release:</label>
+              <div class="flex gap-2">
+                <input id="waitlist-email" type="email" required placeholder="you@domain.com" class="flex-1 h-9 px-3 rounded-xl bg-white border border-slate-200 text-xs text-ink outline-none focus:border-cobalt-600" />
+                <button type="submit" class="px-3.5 h-9 rounded-xl bg-ink hover:bg-slate-800 text-white text-xs font-semibold transition">Notify</button>
+              </div>
+              <p id="waitlist-msg" class="hidden text-[11px] font-semibold text-emeraldInk-text"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FAQ ACCORDION ==================== -->
+  <section id="faq" class="bg-white py-16 sm:py-24">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10">
+        <span class="text-xs font-bold uppercase tracking-wider text-cobalt-600">Questions &amp; Answers</span>
+        <h2 class="font-display text-3xl font-extrabold text-ink tracking-tight mt-2">Everything you need to know</h2>
+      </div>
+      <div class="space-y-3" id="faq-list"></div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-alabaster border-t border-slate-200 py-10 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center" id="footer-logo"></div>
+        <div>
+          <p class="font-display font-bold text-sm text-ink">Vodraft <span class="font-mono text-xs text-steel font-normal">com.vocal.text</span></p>
+          <p class="text-xs text-graphite">Speak Freely, Write Instantly.</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-5 text-xs font-medium text-graphite">
+        <button data-open-legal="privacy" class="hover:text-ink transition">Privacy Policy</button>
+        <button data-open-legal="terms" class="hover:text-ink transition">Terms of Service</button>
+        <button data-open-download="true" class="text-cobalt-600 font-semibold hover:underline">Download APK</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== MODAL PORTAL (Download & Legal) ==================== -->
+  <div id="modal-backdrop" class="hidden fixed inset-0 z-50 bg-ink/45 backdrop-blur-xs flex items-center justify-center p-4">
+    <div id="modal-card" class="w-full max-w-md bg-white rounded-[28px] border border-slate-200 shadow-elevated p-6 relative"></div>
+  </div>
+
+  <script src="./assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background-color: #FFFFFF;
+  color: #0B1220;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+.font-mono, code {
+  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, sans-serif !important;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.015em;
+}
+
+/* Subtle Editorial Paper Dot Grid */
+.paper-grid {
+  background-image: radial-gradient(#CBD5E1 0.85px, transparent 0.85px);
+  background-size: 24px 24px;
+}
+
+/* Floating Pill Waveform & AI Shimmer */
+@keyframes wavePulse {
+  0%, 100% { transform: scaleY(0.32); }
+  50% { transform: scaleY(1); }
+}
+
+.wave-bar {
+  transform-origin: center;
+  animation: wavePulse 0.82s ease-in-out infinite;
+}
+.wave-bar:nth-child(2) { animation-delay: 0.14s; animation-duration: 0.72s; }
+.wave-bar:nth-child(3) { animation-delay: 0.28s; animation-duration: 0.64s; }
+.wave-bar:nth-child(4) { animation-delay: 0.12s; animation-duration: 0.78s; }
+.wave-bar:nth-child(5) { animation-delay: 0.24s; animation-duration: 0.86s; }
+
+@keyframes aiShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.ai-shimmer-ring {
+  background: linear-gradient(90deg, #2563EB, #0284C7, #4F46E5, #2563EB);
+  background-size: 240% 240%;
+  animation: aiShimmer 2.1s ease infinite;
+}
+
+.ai-text-shimmer {
+  background: linear-gradient(90deg, #1D4ED8, #0284C7, #4F46E5, #1D4ED8);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: aiShimmer 2s linear infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(0.92); opacity: 1; }
+  50% { transform: scale(1.32); opacity: 0.72; }
+}
+
+.rec-dot {
+  animation: pulseDot 1s ease-in-out infinite;
+}
+
+/* ===== SAAS MOTION GRAPHICS SUITE ===== */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes floatChipA {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50% { transform: translateY(-7px) translateX(3px); }
+}
+
+@keyframes floatChipB {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50% { transform: translateY(7px) translateX(-4px); }
+}
+
+@keyframes blobDrift {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(-24px, 18px) scale(1.06); }
+  66% { transform: translate(18px, -14px) scale(0.96); }
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes btnSheen {
+  0% { transform: translateX(-120%) skewX(-22deg); }
+  35%, 100% { transform: translateX(260%) skewX(-22deg); }
+}
+
+@keyframes beamPacket {
+  0% { stroke-dashoffset: 220; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-enter {
+  animation: heroFadeUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero-enter-d1 { animation-delay: 0.08s; }
+.hero-enter-d2 { animation-delay: 0.16s; }
+.hero-enter-d3 { animation-delay: 0.24s; }
+.hero-enter-d4 { animation-delay: 0.32s; }
+
+.ambient-blob {
+  animation: blobDrift 14s ease-in-out infinite;
+}
+
+.phone-levitate {
+  animation: floatSlow 6.5s ease-in-out infinite;
+}
+
+.chip-float-a {
+  animation: floatChipA 5.2s ease-in-out infinite;
+}
+
+.chip-float-b {
+  animation: floatChipB 5.8s ease-in-out infinite;
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 24s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.cta-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-sheen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 42%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  animation: btnSheen 4.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.saas-card {
+  position: relative;
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.32s ease, border-color 0.25s ease;
+}
+
+.saas-card:hover {
+  transform: translateY(-4px);
+  border-color: #BFDBFE;
+  box-shadow: 0 18px 38px rgba(37, 99, 235, 0.09), 0 4px 12px rgba(11, 18, 32, 0.04);
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.signal-beam-path {
+  stroke-dasharray: 46 180;
+  animation: beamPacket 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.scenario-swap {
+  animation: heroFadeUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter, .ambient-blob, .phone-levitate, .chip-float-a, .chip-float-b,
+  .marquee-track, .cta-sheen::after, .signal-beam-path, .wave-bar, .rec-dot {
+    animation: none !important;
+  }
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
